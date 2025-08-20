@@ -21,6 +21,16 @@ export const certificates = [
   },
   {
     id: 3,
+    title: "CCNA - Introduction to Networks",
+    description: "Cisco Certified Network Associate - Introduction to Networks",
+    issuer: "Cisco",
+    date: "2024",
+    file: "https://drive.google.com/file/d/17yEQTiG5Msb-u_DH__gUOqQZowY9nPHB/view?usp=drive_link",
+    type: "technical",
+    featured: true,
+  },
+  {
+    id: 4,
     title: "Device Configuration and Management",
     description:
       "Professional certification in device configuration and management",
@@ -31,7 +41,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Course Certificate - MongoDB",
     description: "MongoDB Database Management Certification",
     issuer: "MongoDB University",
@@ -41,7 +51,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 5,
+    id: 6,
     title: "Course Certificate - React.js",
     description: "React.js Development Certification",
     issuer: "React Training Institute",
@@ -51,7 +61,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 6,
+    id: 7,
     title: "Course Certificate - ES6",
     description: "ECMAScript 6 (ES6) JavaScript Certification",
     issuer: "JavaScript Training Institute",
@@ -61,7 +71,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 7,
+    id: 8,
     title: "Course Certificate - TypeScript",
     description: "TypeScript Development Certification",
     issuer: "TypeScript Training Institute",
@@ -71,7 +81,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 8,
+    id: 9,
     title: "Course Certificate - JavaScript",
     description: "JavaScript Programming Certification",
     issuer: "JavaScript Training Institute",
@@ -81,7 +91,7 @@ export const certificates = [
     featured: false,
   },
   {
-    id: 9,
+    id: 10,
     title: "Course Certificate - General",
     description: "General Web Development Certification",
     issuer: "Web Development Institute",
