@@ -1,0 +1,341 @@
+[
+  {
+    "id": 1,
+    "title": {
+      "en": "E-Commerce Platform",
+      "ar": "منصة التجارة الإلكترونية"
+    },
+    "description": {
+      "en": "Full-stack e-commerce solution with React, Node.js, and MongoDB",
+      "ar": "منصة تجارة إلكترونية كاملة مع واجهة أمامية وخلفية ونظام إدارة"
+    },
+    "image": "/img/E-Commerce Platform.jpeg",
+    "technologies": ["JavaScript", "React", "Node.js", "MongoDB", "Express"],
+    "liveUrl": "https://e-commerce-main-site.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/E-Commerce--Main-Site-",
+    "featured": true
+  },
+
+  {
+    "id": 2,
+    "title": {
+      "en": "E-Commerce Dashboard",
+      "ar": "لوحة تحكم التجارة الإلكترونية"
+    },
+    "description": {
+      "en": "Advanced admin dashboard for store management, products, and sales",
+      "ar": "لوحة تحكم إدارية متقدمة لإدارة المتجر والمنتجات والمبيعات"
+    },
+    "image": "/img/E-Commerce Dashboard.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Admin Dashboard",
+      "Analytics"
+    ],
+    "liveUrl": "https://e-commerce-dashboard-sage.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/E-Commerce--Dashboard-",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": {
+      "en": "Attendance System for Employees",
+      "ar": "نظام حضور الموظفين"
+    },
+    "description": {
+      "en": "Advanced attendance system for employees with user-friendly interface, to Get account to login go to github",
+      "ar": "نظام حضور متقدم للموظفين مع واجهة سهلة الاستخدام ، للحصول على حساب لتسجيل الدخول انتقل إلى github "
+    },
+    "image": "/img/Attendance System for Employees.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Employee Management",
+      "Attendance Tracking"
+    ],
+    "liveUrl": "https://attendance-system-mu.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Attendance-Systme-For-Employee-Graduation-Project-",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": {
+      "en": "Natours",
+      "ar": "ناتورز"
+    },
+    "description": {
+      "en": "Tourism website with modern design and exceptional user experience",
+      "ar": "موقع سياحي مع تصميم حديث وتجربة مستخدم مميزة"
+    },
+    "image": "/img/Natours.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Tourism",
+      "Modern Design",
+      "User Experience"
+    ],
+    "liveUrl": "https://natours-lake-one.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Natours",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "title": {
+      "en": "Fast React Pizza",
+      "ar": "فاست رياكت بيتزا"
+    },
+    "description": {
+      "en": "Pizza ordering SPA built with React",
+      "ar": "تطبيق أحادي الصفحة لطلب البيتزا مبني برياكت"
+    },
+    "image": "/img/Fast React Pizza.jpeg",
+    "technologies": ["JavaScript", "React", "SPA", "Redux", "API Integration"],
+    "liveUrl": "https://fast-react-pizza-ten-sooty.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Fast-React-Pizza",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": {
+      "en": "Contracting Company Landing Page",
+      "ar": "صفحة شركة المقاولات"
+    },
+    "description": {
+      "en": "Professional landing page for contracting company with modern design",
+      "ar": "صفحة هبوط احترافية لشركة مقاولات مع تصميم حديث"
+    },
+    "image": "/img/Contracting Company Landing Page.png",
+    "technologies": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Responsive Design"
+    ],
+    "liveUrl": "https://contracting-company-landing-page.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Contracting-company--Landing-Page-",
+    "featured": false
+  },
+  {
+    "id": 7,
+    "title": {
+      "en": "Chemi-Net Landing Page",
+      "ar": "صفحة كيمي نت"
+    },
+    "description": {
+      "en": "Specialized landing page for chemical company with professional design",
+      "ar": "صفحة هبوط متخصصة لشركة كيميائية مع تصميم احترافي"
+    },
+    "image": "/img/Chemi-Net Landing Page.png",
+    "technologies": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Modern UI/UX",
+      "Responsive"
+    ],
+    "liveUrl": "https://chemi-net-landing-page.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Chemi-Net--Landing-Page-",
+    "featured": false
+  },
+  {
+    "id": 8,
+    "title": {
+      "en": "Global Solutions Multi-Languages",
+      "ar": "الحلول العالمية متعددة اللغات"
+    },
+    "description": {
+      "en": "Multi-language website for global solutions with support for multiple languages",
+      "ar": "موقع متعدد اللغات لحلول عالمية مع دعم عدة لغات"
+    },
+    "image": "/img/Global Solutions Multi-Languages.png",
+    "technologies": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "i18n",
+      "Multi-language"
+    ],
+    "liveUrl": "https://global-solutions-multi-languages.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Global-Solutions--Multi-Languages-",
+    "featured": false
+  },
+  {
+    "id": 9,
+    "title": {
+      "en": "The World Wise",
+      "ar": "ذا وورلد وايز"
+    },
+    "description": {
+      "en": "Travel companion to track cities and trips on an interactive map",
+      "ar": "تطبيق لتتبع المدن والرحلات على خريطة تفاعلية"
+    },
+    "image": "/img/The World Wise.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Maps",
+      "Routing",
+      "API Integration"
+    ],
+    "liveUrl": "https://the-world-wise-pied.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/The-World-Wise",
+    "featured": false
+  },
+  {
+    "id": 10,
+    "title": {
+      "en": "Use Popcorn",
+      "ar": "يوز بوبكورن"
+    },
+    "description": {
+      "en": "Movie app to search titles and rate watched films",
+      "ar": "تطبيق أفلام للبحث عن العناوين وتقييم الأفلام التي تمت مشاهدتها"
+    },
+    "image": "/img/Use Popcorn.jpeg",
+    "technologies": ["JavaScript", "React", "Custom Hooks", "API Integration"],
+    "liveUrl": "https://use-popcorn-swart-iota.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Use-Popcorn",
+    "featured": false
+  },
+  {
+    "id": 11,
+    "title": {
+      "en": "React Quiz",
+      "ar": "اختبار رياكت"
+    },
+    "description": {
+      "en": "Interactive quiz application built with React",
+      "ar": "تطبيق اختبارات تفاعلي مبني برياكت"
+    },
+    "image": "/img/React Quiz.jpeg",
+    "technologies": ["JavaScript", "React", "State Management"],
+    "liveUrl": "https://react-quiz-five-weld.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/React-Quiz",
+    "featured": false
+  },
+  {
+    "id": 12,
+    "title": {
+      "en": "React Blog",
+      "ar": "مدونة رياكت"
+    },
+    "description": {
+      "en": "Simple blog platform built with React",
+      "ar": "منصة تدوين بسيطة مبنية برياكت"
+    },
+    "image": "/img/React Blog.jpeg",
+    "technologies": ["JavaScript", "React", "Markdown"],
+    "liveUrl": "https://react-blog-tawny-nine.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/React-Blog",
+    "featured": false
+  },
+
+  {
+    "id": 12,
+    "title": {
+      "en": "Movie Application",
+      "ar": "تطبيق الأفلام"
+    },
+    "description": {
+      "en": "Movie application with comprehensive database and attractive design",
+      "ar": "تطبيق أفلام مع قاعدة بيانات شاملة وتصميم جذاب"
+    },
+    "image": "/img/Movie Application.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Movie Database",
+      "API Integration",
+      "Responsive"
+    ],
+    "liveUrl": "https://movie-app-three-bay.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Movie-App",
+    "featured": false
+  },
+  {
+    "id": 14,
+    "title": {
+      "en": "Restaurant Website",
+      "ar": "موقع المطعم"
+    },
+    "description": {
+      "en": "Professional restaurant website with menu and attractive design",
+      "ar": "موقع مطعم احترافي مع قائمة طعام وتصميم جذاب"
+    },
+    "image": "/img/Restaurant Website.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Restaurant",
+      "Menu Management",
+      "Responsive"
+    ],
+    "liveUrl": "https://restaurant-psi-silk-24.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Restaurant",
+    "featured": false
+  },
+  {
+    "id": 15,
+    "title": {
+      "en": "Q&A Application",
+      "ar": "تطبيق الأسئلة والأجوبة"
+    },
+    "description": {
+      "en": "Interactive Q&A application with voting system",
+      "ar": "تطبيق أسئلة وأجوبة تفاعلي مع نظام تصويت"
+    },
+    "image": "/img/Q&A Application.jpeg",
+    "technologies": [
+      "JavaScript",
+      "React",
+      "Q&A Platform",
+      "Voting System",
+      "Interactive"
+    ],
+    "liveUrl": "https://q-a-app.vercel.app/",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Q-A-App",
+    "featured": false
+  },
+
+  {
+    "id": 16,
+    "title": {
+      "en": "E-Commerce Backend",
+      "ar": "خلفية التجارة الإلكترونية"
+    },
+    "description": {
+      "en": "Comprehensive backend system for e-commerce platform with powerful API",
+      "ar": "نظام خلفية متكامل لمنصة التجارة الإلكترونية مع API قوية"
+    },
+    "image": "/img/github.png",
+    "technologies": ["JavaScript", "Node.js", "Express", "MongoDB", "REST API"],
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/E-Commerce--Back-End-",
+    "featured": true
+  },
+  {
+    "id": 17,
+    "title": {
+      "en": "Student Management System",
+      "ar": "نظام إدارة الطلاب"
+    },
+    "description": {
+      "en": "Comprehensive student management system with grade and course management",
+      "ar": "نظام إدارة طلاب شامل مع إدارة الدرجات والمواد الدراسية"
+    },
+    "image": "/img/github.png",
+    "technologies": [
+      "Java",
+      "SQL Server",
+      "Student Management",
+      "Grade Management",
+      "Course Management"
+    ],
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Student-Management-System",
+    "featured": false
+  }
+]
