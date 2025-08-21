@@ -19,7 +19,7 @@ import { Translations } from "@/lib/types";
 interface AboutSectionProps {
   isDark: boolean;
   t: Translations;
-  language: "en" | "ar";
+  language?: "en" | "ar";
 }
 
 export function AboutSection({ isDark, t }: AboutSectionProps) {
