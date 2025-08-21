@@ -95,7 +95,7 @@ portfolio-me/
 
 ### 📧 Contact Information
 
-- **Email**: ahmed.abd.elkareem@gmail.com
+- **Email**: ahmed.abd.elkareem015@gmail.com
 - **LinkedIn**: [Ahmed Abd EL Kareem](https://www.linkedin.com/in/ahmed-ayman-mern/)
 - **GitHub**: [Ahmed-Abd-EL-Kareem](https://github.com/Ahmed-Abd-EL-Kareem)
 
@@ -196,7 +196,7 @@ portfolio-me/
 
 ### 📧 معلومات التواصل
 
-- **البريد الإلكتروني**: ahmed.abd.elkareem@gmail.com
+- **البريد الإلكتروني**: ahmed.abd.elkareem015@gmail.com
 - **LinkedIn**: [أحمد عبد الكريم](https://www.linkedin.com/in/ahmed-ayman-mern/)
 - **GitHub**: [Ahmed-Abd-EL-Kareem](https://github.com/Ahmed-Abd-EL-Kareem)
 

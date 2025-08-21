@@ -39,15 +39,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    optimizePackageImports: ["lucide-react"],
-  },
-  // إزالة إعدادات i18n التي قد تسبب مشاكل في Next.js 15
-  // i18n: {
-  //   locales: ["en", "ar"],
-  //   defaultLocale: "en",
-  //   localeDetection: false,
-  // },
 };
 
 export default nextConfig;
