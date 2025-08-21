@@ -62,7 +62,7 @@ export default function Portfolio() {
 
   return (
     <div
-      className={`min-h-screen transition-all duration-500 ${
+      className={`min-h-screen transition-all duration-500  ${
         isDark
           ? "dark bg-gradient-to-br from-slate-900 via-indigo-950/30 to-violet-900/20"
           : "bg-gradient-to-br from-blue-50 via-indigo-50/30 to-purple-50/50"
@@ -100,7 +100,7 @@ export default function Portfolio() {
       <ProjectsSection isDark={isDark} t={t} currentLanguage={language} />
 
       {/* About Section */}
-      <AboutSection isDark={isDark} t={t} language={language} />
+      <AboutSection isDark={isDark} t={t} />
 
       {/* Skills Section */}
       <SkillsSection isDark={isDark} t={t} />

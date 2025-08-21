@@ -35,7 +35,7 @@ export const translations: Record<"en" | "ar", Translations> = {
       text: "Experienced full stack web developer with a strong foundation in modern web technologies. I specialize in creating scalable, user-centric applications that deliver measurable business value through clean code and innovative solutions.",
       experience: "Professional Experience",
       location: "Cairo, Egypt",
-      email: "ahmed.abd.elkareem@gmail.com",
+      email: "ahmed.abd.elkareem015@gmail.com",
       phone: "+20 123 456 7890",
     },
 
@@ -187,7 +187,7 @@ export const translations: Record<"en" | "ar", Translations> = {
       text: "مطور ويب متكامل ذو خبرة واسعة في تقنيات الويب الحديثة. أتخصص في إنشاء تطبيقات قابلة للتوسع ومتمحورة حول المستخدم تحقق قيمة تجارية ملموسة من خلال الكود النظيف والحلول المبتكرة.",
       experience: "الخبرة المهنية",
       location: "القاهرة، مصر",
-      email: "ahmed.abd.elkareem@gmail.com",
+      email: "ahmed.abd.elkareem015@gmail.com",
       phone: "+20 123 456 7890",
     },
 

@@ -18,7 +18,7 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="mt-4 min-h-screen relative overflow-hidden flex items-center"
+      className="mt-4 min-h-screen relative overflow-hidden flex items-center xl:mx-4"
     >
       {/* 3D Canvas Background */}
       <ThreeScene isDark={isDark} language={language} name={t.hero.name} />
@@ -167,6 +167,12 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                 size="lg"
                 icon={Download}
                 className="group"
+                onClick={() =>
+                  window.open(
+                    "https://drive.google.com/uc?export=download&id=13r5iwDwsmv5_kXdcNMvw0bIsjauV_XCo",
+                    "_blank"
+                  )
+                }
               >
                 <span className="mr-2">{t.hero.downloadCV}</span>
                 <motion.span

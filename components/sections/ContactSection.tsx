@@ -52,7 +52,7 @@ export function ContactSection({ isDark, t }: ContactSectionProps) {
               {
                 icon: Mail,
                 title: "Email",
-                content: "ahmed.abd.elkareem@gmail.com",
+                content: "ahmed.abd.elkareem015@gmail.com",
                 color: "blue",
                 gradient: "from-blue-400 to-cyan-400",
                 bgGradient: isDark
@@ -160,7 +160,7 @@ export function ContactSection({ isDark, t }: ContactSectionProps) {
               icon={Mail}
               className="px-8 sm:px-10 md:px-12 py-3 sm:py-4 text-lg sm:text-xl"
               onClick={() =>
-                window.open("mailto:ahmed.abd.elkareem@gmail.com", "_blank")
+                window.open("mailto:ahmed.abd.elkareem015@gmail.com", "_blank")
               }
             >
               {t.contact.letWorkTogether}
