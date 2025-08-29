@@ -114,7 +114,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "jq": "^1.0.0",
     "lighthouse": "^11.4.0",
-    "memlab": "^0.10.0",
     "next-sitemap": "^4.2.3",
     "postcss": "^8.4.31",
     "prettier": "^3.0.0",
