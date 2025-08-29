@@ -2,20 +2,8 @@ const config = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    // تحسين الأداء - ضغط CSS
-    ...(process.env.NODE_ENV === 'production' && {
-      cssnano: {
-        preset: ['default', {
-          discardComments: {
-            removeAll: true,
-          },
-          normalizeWhitespace: true,
-          colormin: true,
-          minifyFontValues: true,
-          minifySelectors: true,
-        }],
-      },
-    }),
+    // Note: Next.js already minifies CSS in production via SWC. Keeping
+    // the config minimal avoids optional plugins like cssnano.
   },
 };
 
