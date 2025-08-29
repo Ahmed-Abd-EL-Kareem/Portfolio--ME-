@@ -5,7 +5,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-*.env
 # Next.js
 .next/
 out/
