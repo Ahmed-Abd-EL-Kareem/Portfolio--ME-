@@ -6,7 +6,8 @@ import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
 import { ThreeScene } from "@/components/3d/ThreeScene";
 import Image from "next/image";
 import { Translations } from "@/lib/types";
-// import heroIcon from "../../app/data/icon.json";
+import { Suspense } from "react";
+
 interface HeroSectionProps {
   isDark: boolean;
   language: "en" | "ar";
@@ -21,7 +22,9 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
       className="mt-4 min-h-screen relative overflow-hidden flex items-center xl:mx-4"
     >
       {/* 3D Canvas Background */}
-      <ThreeScene isDark={isDark} language={language} name={t.hero.name} />
+      <Suspense fallback={null}>
+        <ThreeScene isDark={isDark} language={language} name={t.hero.name} />
+      </Suspense>
 
       {/* Hero Content */}
       <div className="container mx-auto px-4 relative z-10">
@@ -229,6 +232,8 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                   key={social.label}
                   href={social.href}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${social.label} profile`}
                   className={`p-3 rounded-full ${
                     isDark
                       ? "bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white border border-slate-700/50"
@@ -288,11 +293,14 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                   >
                     <Image
                       src="/main.jpg"
-                      alt={t.hero.name}
+                      alt={`${t.hero.name} - Full Stack Web Developer`}
                       width={400}
                       height={400}
                       className="w-full h-full object-cover"
                       priority
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 400px"
                     />
                   </div>
                 </motion.div>

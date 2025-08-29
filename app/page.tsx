@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useTranslation } from "@/lib/useTranslation";
 import { Navigation } from "@/components/layout/Navigation";
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -9,12 +9,25 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { CertificateSection } from "@/components/sections/CertificateSection";
 import { EducationSection } from "@/components/sections/EducationSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+
+// Dynamic imports للمكونات الثقيلة
+const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection").then(mod => ({ default: mod.ProjectsSection })), {
+  ssr: false,
+  loading: () => <div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>
+});
+
+const ThreeScene = dynamic(() => import("@/components/3d/ThreeScene").then(mod => ({ default: mod.ThreeScene })), {
+  ssr: false,
+  loading: () => null
+});
+
+// تحسين استيراد dynamic
+import dynamic from 'next/dynamic';
 
 export default function Portfolio() {
   const [isDark, setIsDark] = useState(false);
@@ -69,7 +82,9 @@ export default function Portfolio() {
       }`}
     >
       {/* Animated Background */}
-      <AnimatedBackground isDark={isDark} mousePosition={mousePosition} />
+      <Suspense fallback={null}>
+        <AnimatedBackground isDark={isDark} mousePosition={mousePosition} />
+      </Suspense>
 
       {/* Progress Bar */}
       <ProgressBar />
@@ -86,27 +101,33 @@ export default function Portfolio() {
       />
 
       {/* Hero Section */}
-      <HeroSection
-        isDark={isDark}
-        language={language}
-        mousePosition={mousePosition}
-        t={t}
-      />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>}>
+        <HeroSection
+          isDark={isDark}
+          language={language}
+          mousePosition={mousePosition}
+          t={t}
+        />
+      </Suspense>
 
       {/* Stats Section */}
       <StatsSection isDark={isDark} t={t} />
 
       {/* Projects Section */}
-      <ProjectsSection isDark={isDark} t={t} currentLanguage={language} />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>}>
+        <ProjectsSection isDark={isDark} t={t} currentLanguage={language} />
+      </Suspense>
 
       {/* About Section */}
-      <AboutSection isDark={isDark} t={t} />
+      <AboutSection isDark={isDark} t={t} language={language} />
 
       {/* Skills Section */}
       <SkillsSection isDark={isDark} t={t} />
 
       {/* Certificates Section */}
-      <CertificateSection isDark={isDark} t={t} currentLanguage={language} />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>}>
+        <CertificateSection isDark={isDark} t={t} currentLanguage={language} />
+      </Suspense>
 
       {/* Education Section */}
       <EducationSection isDark={isDark} t={t} />

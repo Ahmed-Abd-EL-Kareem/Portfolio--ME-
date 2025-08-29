@@ -120,12 +120,15 @@ export function Navigation({
           <div className="relative">
             <Image
               src="/logo.png"
-              alt="Logo"
+              alt="Ahmed Abd EL Kareem Portfolio Logo"
               width={50}
               height={50}
               className={`w-12 h-12 object-contain transition-all duration-300 group-hover:drop-shadow-lg ${
                 isDark ? "invert" : ""
               }`}
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
             />
             {/* تأثير التوهج عند التحويم */}
             <motion.div

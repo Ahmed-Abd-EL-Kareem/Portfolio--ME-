@@ -56,6 +56,12 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    /* الخط الافتراضي للموقع باستخدام متغيرات next/font */
+    font-family: var(--font-poppins), var(--font-arabic), var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
+  /* صنف مساعد لفرض الخط العربي عند الحاجة */
+  .font-arabic {
+    font-family: var(--font-arabic), var(--font-poppins), var(--font-inter), system-ui, sans-serif;
   }
 }
 
