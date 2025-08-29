@@ -9,7 +9,7 @@ interface ProfessionalButtonProps {
   size?: "sm" | "md" | "lg";
   onClick?: () => void;
   className?: string;
-  icon?: React.ComponentType<{ className?: string }>;
+  icon?: React.ElementType;
   [key: string]: unknown;
 }
 

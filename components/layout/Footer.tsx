@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface FooterProps {
   isDark: boolean;

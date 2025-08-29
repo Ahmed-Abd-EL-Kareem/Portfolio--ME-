@@ -21,10 +21,7 @@ const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSect
   loading: () => <div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>
 });
 
-const ThreeScene = dynamic(() => import("@/components/3d/ThreeScene").then(mod => ({ default: mod.ThreeScene })), {
-  ssr: false,
-  loading: () => null
-});
+// Removed unused ThreeScene dynamic import to satisfy type checker
 
 // تحسين استيراد dynamic
 import dynamic from 'next/dynamic';

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Ahmed Abd EL Kareem" }],
   creator: "Ahmed Abd EL Kareem",
   publisher: "Ahmed Abd EL Kareem",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env['NEXT_PUBLIC_SITE_URL'] || 'http://localhost:3000'),
   robots: {
     index: true,
     follow: true,
