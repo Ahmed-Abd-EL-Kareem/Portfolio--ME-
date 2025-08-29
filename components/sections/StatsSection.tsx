@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface StatsSectionProps {
   isDark: boolean;

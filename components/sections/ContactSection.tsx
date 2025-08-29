@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github } from "lucide-react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface ContactSectionProps {
   isDark: boolean;

@@ -5,7 +5,7 @@ import { Download, Mail, Github, Linkedin, MapPin } from "lucide-react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
 import { ThreeScene } from "@/components/3d/ThreeScene";
 import Image from "next/image";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 import { Suspense } from "react";
 
 interface HeroSectionProps {

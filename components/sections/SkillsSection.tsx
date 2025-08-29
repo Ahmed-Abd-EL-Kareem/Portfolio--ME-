@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 import skills from "../../app/data/skills";
 interface SkillsSectionProps {
   isDark: boolean;

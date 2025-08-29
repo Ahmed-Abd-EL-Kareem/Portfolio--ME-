@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface EducationSectionProps {
   isDark: boolean;

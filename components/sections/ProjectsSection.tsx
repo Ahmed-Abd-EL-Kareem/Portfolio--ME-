@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Eye, Github, ExternalLink, Star, ChevronDown } from "lucide-react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
 import Image from "next/image";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 import projects from "@/app/data/Project.json";
 import { useState } from "react";
 

@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
 import Image from "next/image";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface AboutSectionProps {
   isDark: boolean;
