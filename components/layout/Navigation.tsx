@@ -5,7 +5,7 @@ import { Sun, Moon, Globe, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 
 interface NavigationProps {
   isDark: boolean;
