@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { ProfessionalButton } from "@/components/ui/ProfessionalButton";
 import { PDFViewerModal } from "@/components/ui/PDFViewerModal";
-import { Translations } from "@/lib/types";
+import type { Translations } from "@/lib/types";
 import certificates from "@/app/data/certificates";
 import { useState } from "react";
 

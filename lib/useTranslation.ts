@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { translations } from "./translations";
-import { Translations } from "./types";
+import type { Translations } from "./types";
 
 export type Language = "en" | "ar";
 

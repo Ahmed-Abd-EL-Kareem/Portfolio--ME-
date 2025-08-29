@@ -15,7 +15,7 @@ interface PDFViewerModalProps {
   isOpen: boolean;
   onClose: () => void;
   fileUrl: string;
-  title?: string;
+  title?: string | undefined;
   isDark: boolean;
 }
 
