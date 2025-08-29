@@ -1,12 +1,6 @@
 {
   "version": 2,
   "name": "portfolio-me",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
   "routes": [
     {
       "src": "/robots.txt",
