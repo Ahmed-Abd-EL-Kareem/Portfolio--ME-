@@ -178,3 +178,4 @@ Your Next.js portfolio is now optimized for:
 
 The optimizations should significantly improve your WebPageTest scores and provide a much better user experience!
 
+
