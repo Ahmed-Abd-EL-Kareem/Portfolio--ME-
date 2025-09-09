@@ -2,6 +2,11 @@
 
 import { useEffect } from 'react'
 
+// Declare gtag function for Google Analytics
+declare global {
+  function gtag(...args: any[]): void
+}
+
 export function PerformanceMonitor() {
   useEffect(() => {
     // Only run in production and in browser
@@ -18,8 +23,11 @@ export function PerformanceMonitor() {
       console.log('Web Vital:', metric)
 
       // Example: Send to Google Analytics
-      if (typeof gtag !== 'undefined') {
-        gtag('event', metric.name, {
+      if (
+        typeof window !== 'undefined' &&
+        typeof (window as any).gtag === 'function'
+      ) {
+        ;(window as any).gtag('event', metric.name, {
           event_category: 'Web Vitals',
           event_label: metric.id,
           value: Math.round(metric.value),
