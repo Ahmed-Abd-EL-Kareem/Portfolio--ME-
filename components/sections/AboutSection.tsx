@@ -1,7 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Mail, Phone, Github, Linkedin, Code, Zap } from 'lucide-react'
+import {
+  MapPin,
+  Mail,
+  Phone,
+  Github,
+  Linkedin,
+  Rocket,
+  Star,
+  Zap,
+  Code,
+} from 'lucide-react'
 import { ProfessionalButton } from '@/components/ui/ProfessionalButton'
 import Image from 'next/image'
 import type { Translations } from '@/lib/types'
@@ -22,27 +32,25 @@ export function AboutSection({ isDark, t }: AboutSectionProps) {
           : 'bg-gradient-to-br from-white/95 via-indigo-50/60 to-purple-50/60'
       } relative overflow-hidden backdrop-blur-sm`}
     >
-      {/* Simplified Background Elements */}
-      {Array.from({ length: 2 }).map((_, i) => (
+      {/* Minimal Background Elements */}
+      {Array.from({ length: 1 }).map((_, i) => (
         <motion.div
           key={i}
-          className={`absolute w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 ${
+          className={`absolute w-16 h-16 sm:w-20 sm:h-20 ${
             isDark
-              ? 'bg-gradient-to-r from-sky-500/10 to-indigo-500/10'
-              : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10'
+              ? 'bg-gradient-to-r from-sky-500/5 to-indigo-500/5'
+              : 'bg-gradient-to-r from-indigo-500/5 to-purple-500/5'
           } rounded-full blur-2xl`}
           style={{
-            left: `${20 + i * 40}%`,
-            top: `${20 + i * 30}%`,
+            left: '30%',
+            top: '30%',
           }}
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.2, 0.4, 0.2],
           }}
           transition={{
-            duration: 6 + i * 2,
+            duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            delay: i * 2,
           }}
         />
       ))}
@@ -120,7 +128,7 @@ export function AboutSection({ isDark, t }: AboutSectionProps) {
                   </div>
                 </motion.div>
 
-                {/* Simplified Floating Icons around photo */}
+                {/* Floating Icons around photo */}
                 {[
                   {
                     icon: Code,
@@ -128,25 +136,34 @@ export function AboutSection({ isDark, t }: AboutSectionProps) {
                     position: 'top-2 -right-2 sm:top-3 sm:-right-4',
                   },
                   {
+                    icon: Rocket,
+                    color: 'from-orange-400 to-red-400',
+                    position: 'top-1/2 -right-2 sm:top-1/2 sm:-right-4',
+                  },
+                  {
+                    icon: Star,
+                    color: 'from-green-400 to-emerald-400',
+                    position: 'top-1/2 -left-2 sm:top-1/2 sm:-left-4',
+                  },
+                  {
                     icon: Zap,
-                    color: 'from-purple-400 to-pink-400',
-                    position: 'bottom-1 -left-2 sm:bottom-2 sm:-left-4',
+                    color: 'from-pink-400 to-purple-400',
+                    position: 'bottom-2 -left-2 sm:bottom-3 sm:-left-4',
                   },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className={`absolute ${item.position} w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center text-white shadow-lg`}
+                    className={`absolute ${item.position} w-10 h-10 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center text-white shadow-lg`}
                     animate={{
-                      y: [0, -10, 0],
-                      scale: [1, 1.05, 1],
+                      y: [0, -5, 0],
                     }}
                     transition={{
-                      duration: 3,
+                      duration: 4,
                       repeat: Number.POSITIVE_INFINITY,
-                      delay: index * 1,
+                      delay: index * 0.5,
                     }}
                   >
-                    <item.icon className='h-2.5 w-2.5 xs:h-3 xs:w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 lg:h-6 lg:w-6' />
+                    <item.icon className='h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 md:h-7 md:w-7' />
                   </motion.div>
                 ))}
               </div>
@@ -159,7 +176,7 @@ export function AboutSection({ isDark, t }: AboutSectionProps) {
               className='space-y-6 sm:space-y-8 md:space-y-10'
             >
               <motion.p
-                className={`text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed max-w-lg mx-auto md:mx-0 px-2 sm:px-0 ${
+                className={`text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-lg mx-auto md:mx-0 px-2 sm:px-0 ${
                   isDark ? 'text-slate-300' : 'text-slate-600'
                 }`}
                 whileInView={{ opacity: [0, 1] }}
@@ -194,21 +211,21 @@ export function AboutSection({ isDark, t }: AboutSectionProps) {
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ x: 15, scale: 1.02 }}
-                    className={`flex items-center gap-3 sm:gap-4 md:gap-5 p-3 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl mx-2 sm:mx-0 ${
+                    className={`flex items-center gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl mx-2 sm:mx-0 ${
                       isDark
                         ? 'hover:bg-gray-800/50 border border-gray-700/30'
                         : 'hover:bg-gray-50/80 border border-gray-200/30'
                     } transition-all duration-300 backdrop-blur-sm`}
                   >
                     <motion.div
-                      className={`p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}
+                      className={`p-1.5 sm:p-2 md:p-2.5 rounded-lg sm:rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <item.icon className='h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white' />
+                      <item.icon className='h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white' />
                     </motion.div>
                     <span
-                      className={`text-sm sm:text-base md:text-lg font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}
+                      className={`text-xs sm:text-sm md:text-base font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}
                     >
                       {item.text}
                     </span>

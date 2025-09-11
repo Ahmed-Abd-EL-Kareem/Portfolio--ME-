@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 interface AnimatedBackgroundProps {
-  isDark: boolean;
-  mousePosition: { x: number; y: number };
+  isDark: boolean
+  mousePosition: { x: number; y: number }
 }
 
 export function AnimatedBackground({
@@ -12,9 +12,9 @@ export function AnimatedBackground({
   mousePosition,
 }: AnimatedBackgroundProps) {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className='fixed inset-0 overflow-hidden pointer-events-none'>
       <motion.div
-        className="absolute inset-0 opacity-20"
+        className='absolute inset-0 opacity-20'
         style={{
           backgroundImage: isDark
             ? `radial-gradient(circle at ${50 + mousePosition.x * 15}% ${
@@ -26,43 +26,41 @@ export function AnimatedBackground({
         }}
       />
 
-      {/* Floating geometric shapes */}
-      {Array.from({ length: 8 }).map((_, i) => (
+      {/* Minimal floating geometric shapes */}
+      {Array.from({ length: 3 }).map((_, i) => (
         <motion.div
           key={i}
           className={`absolute ${
             isDark
-              ? "bg-gradient-to-r from-sky-500/10 to-indigo-500/10"
-              : "bg-gradient-to-r from-blue-500/10 to-violet-500/10"
+              ? 'bg-gradient-to-r from-sky-500/5 to-indigo-500/5'
+              : 'bg-gradient-to-r from-blue-500/5 to-violet-500/5'
           } rounded-full blur-xl`}
           style={{
-            width: `${80 + i * 20}px`,
-            height: `${80 + i * 20}px`,
-            left: `${10 + i * 12}%`,
-            top: `${5 + i * 10}%`,
+            width: `${60 + i * 15}px`,
+            height: `${60 + i * 15}px`,
+            left: `${20 + i * 25}%`,
+            top: `${15 + i * 20}%`,
           }}
           animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, 180, 360],
-            x: [0, 30 + i * 10, 0],
-            y: [0, -20 - i * 5, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
-            duration: 8 + i * 2,
+            duration: 10 + i * 3,
             repeat: Number.POSITIVE_INFINITY,
-            delay: i * 1.5,
+            delay: i * 2,
           }}
         />
       ))}
 
       {/* Simple overlay */}
-      <div className="absolute inset-0 opacity-30">
+      <div className='absolute inset-0 opacity-30'>
         <div
           className={`w-full h-full ${
-            isDark ? "bg-sky-400/5" : "bg-blue-600/5"
+            isDark ? 'bg-sky-400/5' : 'bg-blue-600/5'
           }`}
         />
       </div>
     </div>
-  );
+  )
 }

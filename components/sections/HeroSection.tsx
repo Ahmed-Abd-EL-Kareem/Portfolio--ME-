@@ -1,9 +1,19 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Download, Mail, Github, Linkedin, MapPin } from 'lucide-react'
+import {
+  Download,
+  Mail,
+  Github,
+  Linkedin,
+  MapPin,
+  Trophy,
+  Code,
+  Rocket,
+  Laptop,
+} from 'lucide-react'
 import { ProfessionalButton } from '@/components/ui/ProfessionalButton'
-import { LazyThreeScene } from '@/components/3d/LazyThreeScene'
+import { ConditionalThreeScene } from '@/components/3d/ConditionalThreeScene'
 import Image from 'next/image'
 import type { Translations } from '@/lib/types'
 
@@ -20,8 +30,14 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
       id='hero'
       className='mt-4 min-h-screen relative overflow-hidden flex items-center xl:mx-4'
     >
-      {/* 3D Canvas Background */}
-      <LazyThreeScene isDark={isDark} language={language} name={t.hero.name} />
+      {/* 3D Canvas Background - hidden on small screens */}
+      <div className='hidden sm:block'>
+        <ConditionalThreeScene
+          isDark={isDark}
+          language={language}
+          name={t.hero.name}
+        />
+      </div>
 
       {/* Hero Content */}
       <div className='container mx-auto px-4 relative z-10'>
@@ -52,7 +68,7 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                 👋
               </motion.div>
               <span
-                className={`text-xl ${
+                className={`text-lg ${
                   isDark ? 'text-slate-300' : 'text-indigo-700'
                 }`}
               >
@@ -62,7 +78,7 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
 
             {/* Name */}
             <motion.h1
-              className={`text-5xl md:text-7xl font-black leading-tight ${
+              className={`text-4xl md:text-6xl font-black leading-tight ${
                 isDark ? 'text-transparent' : 'text-transparent'
               }`}
               initial={{ opacity: 0, y: 50 }}
@@ -87,7 +103,7 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
               className='relative'
             >
               <h2
-                className={`text-2xl md:text-4xl font-light ${
+                className={`text-xl md:text-3xl font-light ${
                   isDark ? 'text-slate-200' : 'text-indigo-800'
                 }`}
               >
@@ -107,7 +123,7 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
 
             {/* Description */}
             <motion.p
-              className={`text-lg md:text-xl leading-relaxed max-w-2xl ${
+              className={`text-base md:text-lg leading-relaxed max-w-2xl ${
                 isDark ? 'text-slate-300' : 'text-slate-600'
               }`}
               initial={{ opacity: 0, y: 20 }}
@@ -305,51 +321,87 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                 </motion.div>
               </motion.div>
 
-              {/* Simplified floating elements around photo */}
+              {/* Floating icons around photo */}
               {[
                 {
-                  icon: '💻',
+                  icon: Laptop,
                   color: 'from-blue-400 to-cyan-400',
                   position: 'top-4 -right-4',
                   delay: 0,
                 },
                 {
-                  icon: '🚀',
-                  color: 'from-purple-400 to-pink-400',
+                  icon: Trophy,
+                  color: 'from-green-400 to-emerald-400',
+                  position: 'top-1/2 -right-4',
+                  delay: 0.2,
+                },
+                {
+                  icon: Code,
+                  color: 'from-orange-400 to-yellow-400',
+                  position: 'top-1/2 -left-4',
+                  delay: 0.4,
+                },
+                {
+                  icon: Rocket,
+                  color: 'from-pink-400 to-purple-400',
                   position: 'bottom-4 -left-4',
-                  delay: 0.5,
+                  delay: 0.6,
                 },
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`absolute ${item.position} w-12 h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center text-white shadow-xl backdrop-blur-sm border border-white/20 text-center`}
+                  className={`absolute ${item.position} w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center text-white shadow-xl backdrop-blur-sm border border-white/20`}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{
                     opacity: 1,
                     scale: 1,
-                    y: [0, -8, 0],
+                    y: [0, -5, 0],
                   }}
                   transition={{
                     delay: 2 + item.delay,
                     type: 'spring',
                     y: {
-                      duration: 4,
+                      duration: 5,
                       repeat: Number.POSITIVE_INFINITY,
-                      delay: index * 1,
                     },
                   }}
-                  whileHover={{ scale: 1.1 }}
                 >
-                  <div className='w-6 h-6'>{item.icon}</div>
+                  <item.icon className='w-6 h-6 md:w-7 md:h-7' />
                 </motion.div>
               ))}
 
-              {/* Simplified stats floating cards */}
+              {/* SQL Sphere */}
+              {/* <motion.div
+                className='absolute bottom-4 -left-8 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center text-white shadow-xl backdrop-blur-sm border border-white/20'
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  delay: 2.8,
+                  type: 'spring',
+                  y: {
+                    duration: 5,
+                    repeat: Number.POSITIVE_INFINITY,
+                  },
+                }}
+              >
+                <span className='text-xs md:text-sm font-bold'>SQL</span>
+              </motion.div> */}
+
+              {/* Stats floating cards */}
               {[
                 {
                   label: 'Projects',
                   value: '50+',
                   position: '-top-8 left-8',
+                },
+                {
+                  label: 'Clients',
+                  value: '25+',
+                  position: 'bottom-8 -right-8',
                 },
               ].map((stat, index) => (
                 <motion.div
@@ -358,14 +410,13 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                     isDark
                       ? 'bg-slate-800/90 border-slate-700/50'
                       : 'bg-white/90 border-slate-200/50'
-                  } backdrop-blur-md rounded-xl p-3 border shadow-xl`}
+                  } backdrop-blur-md rounded-lg p-3 md:p-4 border shadow-lg`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.5 + index * 0.3 }}
-                  whileHover={{ scale: 1.02 }}
                 >
                   <div
-                    className={`text-xl font-bold ${
+                    className={`text-xl md:text-2xl font-bold ${
                       isDark ? 'text-sky-400' : 'text-blue-600'
                     }`}
                   >
@@ -380,6 +431,20 @@ export function HeroSection({ isDark, language, t }: HeroSectionProps) {
                   </div>
                 </motion.div>
               ))}
+
+              {/* Technology skill text elements */}
+              <motion.div
+                className='absolute -left-16 top-8 text-2xl md:text-3xl font-bold text-yellow-400'
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 3.2 }}
+              ></motion.div>
+              <motion.div
+                className='absolute -left-12 top-16 text-3xl md:text-4xl font-bold text-blue-400'
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 3.4 }}
+              ></motion.div>
             </div>
           </motion.div>
         </div>

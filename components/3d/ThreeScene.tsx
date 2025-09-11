@@ -27,23 +27,18 @@ export function ThreeScene({ isDark, language, name }: ThreeSceneProps) {
           powerPreference: 'high-performance',
         }}
       >
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color='#00D2FF' />
-        <pointLight
-          position={[-10, -10, -10]}
-          intensity={1.2}
-          color='#FF6B6B'
-        />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[10, 10, 10]} intensity={1.0} color='#00D2FF' />
 
         <Suspense fallback={null}>
           <Environment preset='night' />
         </Suspense>
 
         <Stars
-          radius={300}
-          depth={50}
-          count={200}
-          factor={4}
+          radius={200}
+          depth={30}
+          count={100}
+          factor={2}
           saturation={0}
           fade
         />
@@ -61,7 +56,7 @@ export function ThreeScene({ isDark, language, name }: ThreeSceneProps) {
         </Suspense>
 
         <Suspense fallback={null}>
-          <AnimatedParticles count={30} />
+          <AnimatedParticles count={15} />
         </Suspense>
 
         <OrbitControls
