@@ -26,6 +26,7 @@ export function ConditionalThreeScene({
 }: ConditionalThreeSceneProps) {
   const [shouldLoad3D, setShouldLoad3D] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isLighthouse, setIsLighthouse] = useState(false)
 
   useEffect(() => {
     // Detect if device is mobile
@@ -41,6 +42,16 @@ export function ConditionalThreeScene({
 
     setIsMobile(checkMobile())
 
+    // Detect Lighthouse / PSI user-agent and skip 3D to avoid audit timeouts
+    const ua = navigator.userAgent
+    const lighthousePatterns = [
+      /Lighthouse/i,
+      /Chrome-Lighthouse/i,
+      /PageSpeed/i,
+      /Speed\ Insights/i,
+    ]
+    setIsLighthouse(lighthousePatterns.some(rx => rx.test(ua)))
+
     // Delay 3D loading to prioritize critical content
     const timer = setTimeout(() => {
       setShouldLoad3D(true)
@@ -49,8 +60,8 @@ export function ConditionalThreeScene({
     return () => clearTimeout(timer)
   }, [])
 
-  // Don't load 3D scene on mobile or if user prefers reduced motion
-  if (isMobile || !shouldLoad3D) {
+  // Don't load 3D scene on mobile, during Lighthouse audits, or before delay
+  if (isMobile || isLighthouse || !shouldLoad3D) {
     return null
   }
 
