@@ -13,6 +13,9 @@ const nextConfig = {
     swcPlugins: [],
     scrollRestoration: true,
     esmExternals: 'loose',
+    gzipSize: true,
+    swcMinify: true,
+    optimizeCss: true,
   },
 
   // Transpile packages for better performance
@@ -26,7 +29,7 @@ const nextConfig = {
   // Advanced image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000, // 1 year
     dangerouslyAllowSVG: true,
@@ -198,6 +201,34 @@ const nextConfig = {
         source: '/manifest.json',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
       },
+      // Cache static assets with proper headers
+      {
+        source: '/main.jpg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/main1.jpg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/logo.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ]
   },
 
@@ -213,7 +244,11 @@ const nextConfig = {
   // Performance flags
   poweredByHeader: false,
   compress: true,
-  generateEtags: false,
+  generateEtags: true,
+
+  // Additional performance optimizations
+  reactStrictMode: true,
+  swcMinify: true,
 
   // Output optimization
   output: 'standalone',

@@ -1,0 +1,59 @@
+1. Reduce Render-Blocking Resources
+
+ Inline critical CSS or load CSS asynchronously.
+Check /_next/static/css/085c6891b0bd14c88.css – it blocks rendering.
+
+ Defer or async non-critical JavaScript (large _next/static/chunks/... files).
+
+ Use code splitting to avoid bundling unused JS on first load.
+
+2. Optimize Images
+
+ Serve modern formats (WebP/AVIF) instead of JPEG/PNG where possible.
+
+ Ensure images include width and height to prevent layout shifts.
+
+ Use responsive srcset and lazy-loading for below-the-fold images.
+
+ Convert static images into Next.js Image component (with priority for LCP image).
+
+3. Improve Font Loading
+
+ Add font-display: swap to all custom fonts (Inter, Poppins, Noto Sans Arabic).
+
+ Consider using next/font instead of external font loading.
+
+4. Reduce Final DOM Size
+
+ Current final HTML is +185 KB (88% larger) than delivered HTML.
+
+ Move toward server-side rendering (SSR) or static site generation (SSG) where possible.
+
+ Pre-render more critical HTML instead of relying on client-side JavaScript hydration.
+
+5. Improve Caching & Requests
+
+ Set proper cache headers for static assets.
+Two files have inadequate cache (helvetiker_regular.typeface.json, drei-assets/...hdr).
+
+ Fix the HTTP redirect from githack.com → use a stable CDN or self-host.
+
+6. Accessibility Fixes
+
+ Add alt text or aria-label to <svg> elements flagged without accessibility attributes.
+
+7. Largest Contentful Paint (LCP)
+
+ Current LCP is ~6.9s (too high).
+
+ Optimize hero image: preload it, compress it, and set priority in Next.js <Image>.
+
+ Avoid unnecessary animations or transformations that delay rendering.
+
+8. General Performance
+
+ Enable Brotli/Gzip compression (already partially in use, ensure all assets compressed).
+
+ Use Next.js next/script with strategy="lazyOnload" for analytics/third-party scripts.
+
+ Reduce long tasks: main thread blocked for 1188ms by heavy JS bundles – consider splitting or reducing dependencies.

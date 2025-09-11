@@ -15,6 +15,7 @@ import { Footer } from '@/components/layout/Footer'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 
 // Dynamic imports for heavy components with better loading strategies
 const ProjectsSection = dynamic(
@@ -96,87 +97,99 @@ export default function ClientPortfolio() {
   }
 
   return (
-    <div
-      className={`min-h-screen transition-all duration-500  ${
-        isDark
-          ? 'dark bg-gradient-to-br from-slate-900 via-indigo-950/30 to-violet-900/20'
-          : 'bg-gradient-to-br from-blue-50 via-indigo-50/30 to-purple-50/50'
-      }`}
-    >
-      {/* Animated Background */}
-      <Suspense fallback={null}>
-        <AnimatedBackground isDark={isDark} mousePosition={mousePosition} />
-      </Suspense>
-
-      {/* Progress Bar */}
-      <ProgressBar />
-
-      {/* Navigation */}
-      <Navigation
-        isDark={isDark}
-        language={language}
-        isMenuOpen={isMenuOpen}
-        onToggleTheme={toggleTheme}
-        onToggleLanguage={toggleLanguage}
-        onToggleMenu={toggleMenu}
-        t={t}
-      />
-
-      {/* Hero Section */}
-      <Suspense
-        fallback={
-          <div className='min-h-screen flex items-center justify-center'>
-            <LoadingSpinner />
-          </div>
-        }
+    <ErrorBoundary>
+      <div
+        className={`min-h-screen transition-all duration-500  ${
+          isDark
+            ? 'dark bg-gradient-to-br from-slate-900 via-indigo-950/30 to-violet-900/20'
+            : 'bg-gradient-to-br from-blue-50 via-indigo-50/30 to-purple-50/50'
+        }`}
       >
-        <HeroSection
+        {/* Animated Background */}
+        <Suspense fallback={null}>
+          <AnimatedBackground isDark={isDark} mousePosition={mousePosition} />
+        </Suspense>
+
+        {/* Progress Bar */}
+        <ProgressBar />
+
+        {/* Navigation */}
+        <Navigation
           isDark={isDark}
           language={language}
-          mousePosition={mousePosition}
+          isMenuOpen={isMenuOpen}
+          onToggleTheme={toggleTheme}
+          onToggleLanguage={toggleLanguage}
+          onToggleMenu={toggleMenu}
           t={t}
         />
-      </Suspense>
 
-      {/* Stats Section */}
-      <StatsSection isDark={isDark} t={t} />
+        {/* Hero Section */}
+        <ErrorBoundary>
+          <Suspense
+            fallback={
+              <div className='min-h-screen flex items-center justify-center'>
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            <HeroSection
+              isDark={isDark}
+              language={language}
+              mousePosition={mousePosition}
+              t={t}
+            />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Projects Section */}
-      <Suspense
-        fallback={
-          <div className='min-h-screen flex items-center justify-center'>
-            <LoadingSpinner />
-          </div>
-        }
-      >
-        <ProjectsSection isDark={isDark} t={t} currentLanguage={language} />
-      </Suspense>
+        {/* Stats Section */}
+        <StatsSection isDark={isDark} t={t} />
 
-      {/* About Section */}
-      <AboutSection isDark={isDark} t={t} language={language} />
+        {/* Projects Section */}
+        <ErrorBoundary>
+          <Suspense
+            fallback={
+              <div className='min-h-screen flex items-center justify-center'>
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            <ProjectsSection isDark={isDark} t={t} currentLanguage={language} />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Skills Section */}
-      <SkillsSection isDark={isDark} t={t} />
+        {/* About Section */}
+        <AboutSection isDark={isDark} t={t} language={language} />
 
-      {/* Certificates Section */}
-      <Suspense
-        fallback={
-          <div className='min-h-screen flex items-center justify-center'>
-            <LoadingSpinner />
-          </div>
-        }
-      >
-        <CertificateSection isDark={isDark} t={t} currentLanguage={language} />
-      </Suspense>
+        {/* Skills Section */}
+        <SkillsSection isDark={isDark} t={t} />
 
-      {/* Education Section */}
-      <EducationSection isDark={isDark} t={t} />
+        {/* Certificates Section */}
+        <ErrorBoundary>
+          <Suspense
+            fallback={
+              <div className='min-h-screen flex items-center justify-center'>
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            <CertificateSection
+              isDark={isDark}
+              t={t}
+              currentLanguage={language}
+            />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Contact Section */}
-      <ContactSection isDark={isDark} t={t} />
+        {/* Education Section */}
+        <EducationSection isDark={isDark} t={t} />
 
-      {/* Footer */}
-      <Footer isDark={isDark} t={t} />
-    </div>
+        {/* Contact Section */}
+        <ContactSection isDark={isDark} t={t} />
+
+        {/* Footer */}
+        <Footer isDark={isDark} t={t} />
+      </div>
+    </ErrorBoundary>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 // Declare gtag function for Google Analytics
 declare global {
@@ -8,82 +8,61 @@ declare global {
 }
 
 export function PerformanceMonitor() {
+  const isMonitoring = useRef(false)
+
   useEffect(() => {
     // Only run in production and in browser
     if (
       typeof window === 'undefined' ||
-      process.env.NODE_ENV !== 'production'
+      process.env.NODE_ENV !== 'production' ||
+      isMonitoring.current
     ) {
       return
     }
 
-    // Web Vitals monitoring with error handling
-    const reportWebVitals = (metric: any) => {
-      // Send to analytics service (replace with your preferred service)
-      console.log('Web Vital:', metric)
+    isMonitoring.current = true
 
-      // Example: Send to Google Analytics
+    // Lightweight Web Vitals monitoring
+    const reportWebVitals = (metric: any) => {
+      // Only log critical metrics
       if (
-        typeof window !== 'undefined' &&
-        typeof (window as any).gtag === 'function'
+        metric.name === 'LCP' ||
+        metric.name === 'FID' ||
+        metric.name === 'CLS'
       ) {
-        ;(window as any).gtag('event', metric.name, {
-          event_category: 'Web Vitals',
-          event_label: metric.id,
-          value: Math.round(metric.value),
-          non_interaction: true,
-        })
+        console.log('Critical Web Vital:', metric.name, metric.value)
       }
     }
 
     // Load web-vitals library dynamically with error handling
     import('web-vitals')
-      .then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      .then(({ getCLS, getFID, getLCP }) => {
         getCLS(reportWebVitals)
         getFID(reportWebVitals)
-        getFCP(reportWebVitals)
         getLCP(reportWebVitals)
-        getTTFB(reportWebVitals)
       })
       .catch(error => {
         console.warn('Failed to load web-vitals:', error)
       })
 
-    // Performance observer for additional metrics
+    // Lightweight performance observer for critical metrics only
     if ('PerformanceObserver' in window) {
       try {
         const observer = new PerformanceObserver(list => {
           for (const entry of list.getEntries()) {
-            if (entry.entryType === 'navigation') {
-              const navEntry = entry as PerformanceNavigationTiming
-              console.log('Navigation timing:', {
-                domContentLoaded:
-                  navEntry.domContentLoadedEventEnd -
-                  navEntry.domContentLoadedEventStart,
-                loadComplete: navEntry.loadEventEnd - navEntry.loadEventStart,
-                totalTime: navEntry.loadEventEnd - navEntry.fetchStart,
+            // Only monitor long tasks that could cause timeouts
+            if (entry.entryType === 'longtask' && entry.duration > 50) {
+              console.warn('Long task detected:', {
+                duration: entry.duration,
+                startTime: entry.startTime,
               })
             }
           }
         })
 
-        observer.observe({ entryTypes: ['navigation', 'paint'] })
+        observer.observe({ entryTypes: ['longtask'] })
       } catch (error) {
         console.warn('PerformanceObserver not supported:', error)
-      }
-    }
-
-    // Memory usage monitoring (if available)
-    if ('memory' in performance) {
-      try {
-        const memory = (performance as any).memory
-        console.log('Memory usage:', {
-          used: Math.round(memory.usedJSHeapSize / 1048576) + ' MB',
-          total: Math.round(memory.totalJSHeapSize / 1048576) + ' MB',
-          limit: Math.round(memory.jsHeapSizeLimit / 1048576) + ' MB',
-        })
-      } catch (error) {
-        console.warn('Memory monitoring not available:', error)
       }
     }
   }, [])

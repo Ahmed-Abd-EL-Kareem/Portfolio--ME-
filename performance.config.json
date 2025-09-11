@@ -1,0 +1,19 @@
+{
+  "webVitals": {
+    "enabled": true,
+    "reportingEndpoint": "/api/analytics",
+    "sampleRate": 1
+  },
+  "monitoring": {
+    "longTasks": true,
+    "layoutShifts": true,
+    "resourceTiming": true,
+    "memoryUsage": true
+  },
+  "optimization": {
+    "imageQuality": 85,
+    "lazyLoading": true,
+    "codeSplitting": true,
+    "compression": true
+  }
+}
