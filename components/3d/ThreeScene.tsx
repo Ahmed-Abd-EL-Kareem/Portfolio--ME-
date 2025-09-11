@@ -6,7 +6,7 @@ import { AnimatedParticles } from './AnimatedParticles'
 import { FloatingTechIcons } from './FloatingTechIcons'
 import { AnimatedName } from './AnimatedName'
 import { RotatingPlanet } from './RotatingPlanet'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 interface ThreeSceneProps {
   isDark: boolean
@@ -15,6 +15,14 @@ interface ThreeSceneProps {
 }
 
 export function ThreeScene({ isDark, language, name }: ThreeSceneProps) {
+  // Defer loading heavy environment until after initial paint
+  const [loadEnvironment, setLoadEnvironment] = useState(false)
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setLoadEnvironment(true), 3500)
+    return () => window.clearTimeout(id)
+  }, [])
+
   return (
     <div className='absolute inset-0'>
       <Canvas
@@ -30,9 +38,11 @@ export function ThreeScene({ isDark, language, name }: ThreeSceneProps) {
         <ambientLight intensity={0.6} />
         <pointLight position={[10, 10, 10]} intensity={1.0} color='#00D2FF' />
 
-        <Suspense fallback={null}>
-          <Environment preset='night' />
-        </Suspense>
+        {loadEnvironment && (
+          <Suspense fallback={null}>
+            <Environment preset='night' />
+          </Suspense>
+        )}
 
         <Stars
           radius={200}
