@@ -10,12 +10,6 @@ const nextConfig = {
       'react-icons',
       'three',
     ],
-    swcPlugins: [],
-    scrollRestoration: true,
-    esmExternals: 'loose',
-    gzipSize: true,
-    swcMinify: true,
-    optimizeCss: true,
   },
 
   // Transpile packages for better performance
@@ -57,8 +51,8 @@ const nextConfig = {
     unoptimized: false,
   },
 
-  // Advanced webpack optimization
-  webpack: (config, { dev, isServer, webpack }) => {
+  // Simplified webpack optimization
+  webpack: (config, { dev, isServer }) => {
     // Resolve aliases for better tree shaking
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -71,63 +65,6 @@ const nextConfig = {
       fs: false,
       path: false,
       crypto: false,
-    }
-
-    // Production optimizations
-    if (!dev && !isServer) {
-      // Advanced code splitting
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        minSize: 20000,
-        maxSize: 244000,
-        cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: -10,
-            maxSize: 244000,
-          },
-          three: {
-            test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
-            name: 'three',
-            chunks: 'all',
-            priority: 20,
-            maxSize: 244000,
-          },
-          framer: {
-            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
-            name: 'framer',
-            chunks: 'all',
-            priority: 20,
-            maxSize: 244000,
-          },
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: 'react',
-            chunks: 'all',
-            priority: 30,
-            maxSize: 244000,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 10,
-            reuseExistingChunk: true,
-            maxSize: 244000,
-          },
-        },
-      }
-
-      // Tree shaking optimization
-      config.optimization.usedExports = true
-      config.optimization.sideEffects = false
     }
 
     // Bundle analyzer
@@ -235,10 +172,6 @@ const nextConfig = {
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
-    reactRemoveProperties:
-      process.env.NODE_ENV === 'production'
-        ? { properties: ['^data-testid$'] }
-        : false,
   },
 
   // Performance flags
@@ -249,9 +182,6 @@ const nextConfig = {
   // Additional performance optimizations
   reactStrictMode: true,
   swcMinify: true,
-
-  // Output optimization
-  output: 'standalone',
 
   // Trailing slash optimization
   trailingSlash: false,
