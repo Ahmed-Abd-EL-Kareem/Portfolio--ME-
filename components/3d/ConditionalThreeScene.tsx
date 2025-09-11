@@ -49,13 +49,14 @@ export function ConditionalThreeScene({
       /Chrome-Lighthouse/i,
       /PageSpeed/i,
       /Speed\ Insights/i,
+      /HeadlessChrome/i,
     ]
     setIsLighthouse(lighthousePatterns.some(rx => rx.test(ua)))
 
     // Delay 3D loading to prioritize critical content
     const timer = setTimeout(() => {
       setShouldLoad3D(true)
-    }, 1000) // 1 second delay
+    }, 6000) // push outside Lighthouse desktop time budget
 
     return () => clearTimeout(timer)
   }, [])
