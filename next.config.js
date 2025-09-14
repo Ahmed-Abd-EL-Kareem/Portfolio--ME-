@@ -180,8 +180,6 @@ const nextConfig = {
     ],
     // Enable modern JavaScript features
     esmExternals: true,
-    // Optimize CSS
-    optimizeCss: true,
   },
 
   // Performance flags
