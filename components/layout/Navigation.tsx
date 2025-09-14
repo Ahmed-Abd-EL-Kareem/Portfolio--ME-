@@ -48,9 +48,12 @@ export function Navigation({
     }
   }
 
-  // تتبع القسم النشط أثناء التمرير
+  // تتبع القسم النشط أثناء التمرير - محسن للأداء
   useEffect(() => {
-    const handleScroll = () => {
+    // Cache section positions to avoid forced reflows
+    const sectionPositions = new Map<string, { top: number; bottom: number }>()
+
+    const updateSectionPositions = () => {
       const sections = [
         'hero',
         'projects',
@@ -60,27 +63,60 @@ export function Navigation({
         'education',
         'contact',
       ]
-      const scrollPosition = window.scrollY + 100
 
-      for (const sectionId of sections) {
+      sections.forEach(sectionId => {
         const element = document.getElementById(sectionId)
         if (element) {
-          const offsetTop = element.offsetTop
-          const offsetHeight = element.offsetHeight
-
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(sectionId)
-            break
-          }
+          const rect = element.getBoundingClientRect()
+          const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop
+          sectionPositions.set(sectionId, {
+            top: rect.top + scrollTop,
+            bottom: rect.bottom + scrollTop,
+          })
         }
+      })
+    }
+
+    // Initial position calculation
+    updateSectionPositions()
+
+    // Throttled scroll handler to prevent forced reflows
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 100
+
+          // Find active section using cached positions
+          for (const [sectionId, position] of sectionPositions) {
+            if (
+              scrollPosition >= position.top &&
+              scrollPosition < position.bottom
+            ) {
+              setActiveSection(sectionId)
+              break
+            }
+          }
+
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    // Update positions on resize
+    const handleResize = () => {
+      updateSectionPositions()
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   const navLinks = [

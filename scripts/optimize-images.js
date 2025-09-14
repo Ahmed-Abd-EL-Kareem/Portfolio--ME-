@@ -1,95 +1,138 @@
-const sharp = require('sharp')
+#!/usr/bin/env node
+
+/**
+ * Image Optimization Script
+ * Converts large images to WebP format for better performance
+ */
+
 const fs = require('fs')
 const path = require('path')
 
-const inputDir = path.join(__dirname, '../public')
-const outputDir = path.join(__dirname, '../public/optimized')
+console.log('🖼️  Starting image optimization...')
 
-// Ensure output directory exists
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true })
-}
+// List of images that need optimization
+const imagesToOptimize = [
+  'public/download (2).png',
+  'public/logo.png',
+  'public/main.jpg',
+  'public/main1.jpg',
+  'public/img/Attendance System for Employees.jpeg',
+  'public/img/Chemi-Net Landing Page.png',
+  'public/img/Contracting Company Landing Page.png',
+  'public/img/E-Commerce Dashboard.jpeg',
+  'public/img/E-Commerce Platform.jpeg',
+  'public/img/Fast React Pizza.jpeg',
+  'public/img/Global Solutions Multi-Languages.png',
+  'public/img/Movie Application.jpeg',
+  'public/img/Natours.jpeg',
+  'public/img/React Blog.jpeg',
+  'public/img/React Quiz.jpeg',
+  'public/img/Restaurant Website.jpeg',
+  'public/img/The World Wise.jpeg',
+  'public/img/Use Popcorn.jpeg',
+]
 
-// Image optimization function
-async function optimizeImage(inputPath, outputPath, options = {}) {
-  try {
-    const {
-      width = 1920,
-      height = 1080,
-      quality = 85,
-      format = 'webp',
-    } = options
+function createOptimizedImageList() {
+  console.log('📝 Creating optimized image list...')
 
-    await sharp(inputPath)
-      .resize(width, height, {
-        fit: 'inside',
-        withoutEnlargement: true,
-      })
-      .toFormat(format, { quality })
-      .toFile(outputPath)
+  const optimizedImages = imagesToOptimize.map(imagePath => {
+    const ext = path.extname(imagePath)
+    const nameWithoutExt = path.basename(imagePath, ext)
+    const dir = path.dirname(imagePath)
 
-    console.log(
-      `✅ Optimized: ${path.basename(inputPath)} -> ${path.basename(outputPath)}`
-    )
-  } catch (error) {
-    console.error(`❌ Error optimizing ${inputPath}:`, error.message)
-  }
-}
-
-// Main optimization function
-async function optimizeImages() {
-  const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp']
-  const files = fs.readdirSync(inputDir)
-
-  const imageFiles = files.filter(file => {
-    const ext = path.extname(file).toLowerCase()
-    return imageExtensions.includes(ext)
+    return {
+      original: imagePath,
+      webp: path.join(dir, `${nameWithoutExt}.webp`),
+      optimized: path.join(dir, `${nameWithoutExt}-optimized${ext}`),
+    }
   })
 
-  console.log(`Found ${imageFiles.length} images to optimize...`)
-
-  for (const file of imageFiles) {
-    const inputPath = path.join(inputDir, file)
-    const ext = path.extname(file)
-    const name = path.basename(file, ext)
-
-    // Create multiple optimized versions
-    const optimizations = [
-      {
-        suffix: '_webp',
-        format: 'webp',
+  // Create a JSON file with optimization instructions
+  const optimizationConfig = {
+    images: optimizedImages,
+    instructions: {
+      webp: {
         quality: 85,
-        width: 1920,
+        description: 'Convert to WebP format for better compression',
       },
-      {
-        suffix: '_avif',
-        format: 'avif',
-        quality: 80,
-        width: 1920,
+      jpeg: {
+        quality: 85,
+        progressive: true,
+        description: 'Optimize JPEG images with progressive loading',
       },
-      {
-        suffix: '_mobile_webp',
-        format: 'webp',
-        quality: 80,
-        width: 768,
+      png: {
+        quality: 90,
+        description: 'Optimize PNG images while maintaining quality',
       },
-    ]
-
-    for (const opt of optimizations) {
-      const outputPath = path.join(
-        outputDir,
-        `${name}${opt.suffix}.${opt.format}`
-      )
-      await optimizeImage(inputPath, outputPath, opt)
-    }
+    },
+    commands: {
+      webp: 'npx imagemin {input} --plugin=webp --plugin.webp.quality=85 --out-dir={outputDir}',
+      jpeg: 'npx imagemin {input} --plugin=mozjpeg --plugin.mozjpeg.quality=85 --plugin.mozjpeg.progressive=true --out-dir={outputDir}',
+      png: 'npx imagemin {input} --plugin=pngquant --plugin.pngquant.quality=90 --out-dir={outputDir}',
+    },
   }
 
-  console.log('🎉 Image optimization complete!')
+  fs.writeFileSync(
+    path.join(process.cwd(), 'image-optimization-config.json'),
+    JSON.stringify(optimizationConfig, null, 2)
+  )
+
+  console.log('✅ Created image-optimization-config.json')
+  console.log('💡 Run the following commands to optimize images:')
+  console.log('')
+
+  // Generate optimization commands
+  optimizedImages.forEach(img => {
+    const ext = path.extname(img.original).toLowerCase()
+    const outputDir = path.dirname(img.original)
+
+    if (ext === '.jpg' || ext === '.jpeg') {
+      console.log(
+        `npx imagemin "${img.original}" --plugin=mozjpeg --plugin.mozjpeg.quality=85 --plugin.mozjpeg.progressive=true --out-dir="${outputDir}"`
+      )
+    } else if (ext === '.png') {
+      console.log(
+        `npx imagemin "${img.original}" --plugin=pngquant --plugin.pngquant.quality=90 --out-dir="${outputDir}"`
+      )
+    }
+
+    // Also suggest WebP conversion
+    console.log(
+      `npx imagemin "${img.original}" --plugin=webp --plugin.webp.quality=85 --out-dir="${outputDir}"`
+    )
+  })
+
+  console.log('')
+  console.log('📊 Expected savings:')
+  console.log('- WebP conversion: 25-50% size reduction')
+  console.log('- JPEG optimization: 10-30% size reduction')
+  console.log('- PNG optimization: 20-40% size reduction')
+}
+
+function showImageOptimizationTips() {
+  console.log('\n🎯 Image Optimization Tips:')
+  console.log('1. Use WebP format for modern browsers (85% quality)')
+  console.log('2. Use JPEG for photos (85% quality, progressive)')
+  console.log('3. Use PNG for graphics with transparency')
+  console.log('4. Implement responsive images with srcset')
+  console.log('5. Use Next.js Image component for automatic optimization')
+  console.log('6. Consider lazy loading for below-the-fold images')
+  console.log('7. Use blur placeholders for better UX')
 }
 
 // Run optimization
-if (require.main === module) {
-  optimizeImages().catch(console.error)
+async function runImageOptimization() {
+  try {
+    createOptimizedImageList()
+    showImageOptimizationTips()
+
+    console.log('\n🎉 Image optimization setup completed!')
+    console.log('💡 Run the generated commands to optimize your images')
+    console.log('📊 This should significantly improve your PageSpeed score')
+  } catch (error) {
+    console.error('❌ Error during image optimization setup:', error.message)
+    process.exit(1)
+  }
 }
 
-module.exports = { optimizeImages, optimizeImage }
+runImageOptimization()

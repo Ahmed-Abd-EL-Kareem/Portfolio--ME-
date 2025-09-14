@@ -1,16 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Performance optimizations
-  experimental: {
-    optimizePackageImports: [
-      'framer-motion',
-      'lucide-react',
-      '@react-three/fiber',
-      '@react-three/drei',
-      'react-icons',
-      'three',
-    ],
-  },
 
   // Transpile packages for better performance
   transpilePackages: [
@@ -169,9 +159,29 @@ const nextConfig = {
     ]
   },
 
-  // Compiler optimizations
+  // Compiler optimizations (SWC)
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    // Remove React dev tools in production
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+    // Enable modern JavaScript features
+    styledComponents: false,
+  },
+
+  // Optimize bundle splitting
+  experimental: {
+    optimizePackageImports: [
+      'framer-motion',
+      'lucide-react',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'react-icons',
+      'three',
+    ],
+    // Enable modern JavaScript features
+    esmExternals: true,
+    // Optimize CSS
+    optimizeCss: true,
   },
 
   // Performance flags

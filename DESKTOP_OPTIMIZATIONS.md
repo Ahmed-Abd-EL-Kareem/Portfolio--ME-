@@ -210,3 +210,4 @@ If desktop still times out, consider:
 5. **Use CDN** for static assets
 
 The current optimizations should resolve the desktop timeout issue while maintaining the visual appeal and functionality of your portfolio.
+

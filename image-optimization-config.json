@@ -1,0 +1,114 @@
+{
+  "images": [
+    {
+      "original": "public/download (2).png",
+      "webp": "public\\download (2).webp",
+      "optimized": "public\\download (2)-optimized.png"
+    },
+    {
+      "original": "public/logo.png",
+      "webp": "public\\logo.webp",
+      "optimized": "public\\logo-optimized.png"
+    },
+    {
+      "original": "public/main.jpg",
+      "webp": "public\\main.webp",
+      "optimized": "public\\main-optimized.jpg"
+    },
+    {
+      "original": "public/main1.jpg",
+      "webp": "public\\main1.webp",
+      "optimized": "public\\main1-optimized.jpg"
+    },
+    {
+      "original": "public/img/Attendance System for Employees.jpeg",
+      "webp": "public\\img\\Attendance System for Employees.webp",
+      "optimized": "public\\img\\Attendance System for Employees-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Chemi-Net Landing Page.png",
+      "webp": "public\\img\\Chemi-Net Landing Page.webp",
+      "optimized": "public\\img\\Chemi-Net Landing Page-optimized.png"
+    },
+    {
+      "original": "public/img/Contracting Company Landing Page.png",
+      "webp": "public\\img\\Contracting Company Landing Page.webp",
+      "optimized": "public\\img\\Contracting Company Landing Page-optimized.png"
+    },
+    {
+      "original": "public/img/E-Commerce Dashboard.jpeg",
+      "webp": "public\\img\\E-Commerce Dashboard.webp",
+      "optimized": "public\\img\\E-Commerce Dashboard-optimized.jpeg"
+    },
+    {
+      "original": "public/img/E-Commerce Platform.jpeg",
+      "webp": "public\\img\\E-Commerce Platform.webp",
+      "optimized": "public\\img\\E-Commerce Platform-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Fast React Pizza.jpeg",
+      "webp": "public\\img\\Fast React Pizza.webp",
+      "optimized": "public\\img\\Fast React Pizza-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Global Solutions Multi-Languages.png",
+      "webp": "public\\img\\Global Solutions Multi-Languages.webp",
+      "optimized": "public\\img\\Global Solutions Multi-Languages-optimized.png"
+    },
+    {
+      "original": "public/img/Movie Application.jpeg",
+      "webp": "public\\img\\Movie Application.webp",
+      "optimized": "public\\img\\Movie Application-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Natours.jpeg",
+      "webp": "public\\img\\Natours.webp",
+      "optimized": "public\\img\\Natours-optimized.jpeg"
+    },
+    {
+      "original": "public/img/React Blog.jpeg",
+      "webp": "public\\img\\React Blog.webp",
+      "optimized": "public\\img\\React Blog-optimized.jpeg"
+    },
+    {
+      "original": "public/img/React Quiz.jpeg",
+      "webp": "public\\img\\React Quiz.webp",
+      "optimized": "public\\img\\React Quiz-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Restaurant Website.jpeg",
+      "webp": "public\\img\\Restaurant Website.webp",
+      "optimized": "public\\img\\Restaurant Website-optimized.jpeg"
+    },
+    {
+      "original": "public/img/The World Wise.jpeg",
+      "webp": "public\\img\\The World Wise.webp",
+      "optimized": "public\\img\\The World Wise-optimized.jpeg"
+    },
+    {
+      "original": "public/img/Use Popcorn.jpeg",
+      "webp": "public\\img\\Use Popcorn.webp",
+      "optimized": "public\\img\\Use Popcorn-optimized.jpeg"
+    }
+  ],
+  "instructions": {
+    "webp": {
+      "quality": 85,
+      "description": "Convert to WebP format for better compression"
+    },
+    "jpeg": {
+      "quality": 85,
+      "progressive": true,
+      "description": "Optimize JPEG images with progressive loading"
+    },
+    "png": {
+      "quality": 90,
+      "description": "Optimize PNG images while maintaining quality"
+    }
+  },
+  "commands": {
+    "webp": "npx imagemin {input} --plugin=webp --plugin.webp.quality=85 --out-dir={outputDir}",
+    "jpeg": "npx imagemin {input} --plugin=mozjpeg --plugin.mozjpeg.quality=85 --plugin.mozjpeg.progressive=true --out-dir={outputDir}",
+    "png": "npx imagemin {input} --plugin=pngquant --plugin.pngquant.quality=90 --out-dir={outputDir}"
+  }
+}

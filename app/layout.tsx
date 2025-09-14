@@ -11,6 +11,7 @@ const PerformanceMonitor = dynamic(
     })),
   {
     ssr: false,
+    loading: () => null, // No loading component needed
   }
 )
 import './globals.css'
@@ -178,7 +179,7 @@ export default function RootLayout({
         <link rel='preload' href='/main.jpg' as='image' type='image/jpeg' />
         <link rel='preload' href='/logo.png' as='image' type='image/png' />
 
-        {/* Preload critical fonts */}
+        {/* Preload critical fonts with proper crossorigin */}
         <link
           rel='preload'
           href='/_next/static/media/0484562807a97172-s.p.woff2'
@@ -192,6 +193,26 @@ export default function RootLayout({
           as='font'
           type='font/woff2'
           crossOrigin='anonymous'
+        />
+
+        {/* Critical CSS inlined to prevent render blocking */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+            /* Critical above-the-fold styles */
+            *{box-sizing:border-box}
+            html{scroll-behavior:smooth}
+            body{margin:0;font-family:var(--font-poppins),system-ui,-apple-system,sans-serif;background-color:hsl(var(--background));color:hsl(var(--foreground));line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+            :root{--background:0 0% 100%;--foreground:222.2 84% 4.9%;--primary:221.2 83.2% 53.3%;--primary-foreground:210 40% 98%;--border:214.3 31.8% 91.4%;--radius:0.5rem}
+            .dark{--background:222.2 84% 4.9%;--foreground:210 40% 98%;--primary:217.2 91.2% 59.8%;--primary-foreground:222.2 84% 4.9%;--border:217.2 32.6% 17.5%}
+            nav{position:fixed;top:0;left:0;right:0;z-index:40;backdrop-filter:blur(12px);border-bottom:1px solid hsl(var(--border))}
+            .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+            .font-loading{visibility:hidden}
+            .font-loaded{visibility:visible}
+            img{max-width:100%;height:auto}
+            *{transition:color 0.2s ease,background-color 0.2s ease,border-color 0.2s ease}
+          `,
+          }}
         />
 
         {/* Structured Data */}
