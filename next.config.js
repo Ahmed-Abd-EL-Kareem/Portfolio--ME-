@@ -41,7 +41,7 @@ const nextConfig = {
     unoptimized: false,
   },
 
-  // Simplified webpack optimization
+  // Enhanced webpack optimization
   webpack: (config, { dev, isServer }) => {
     // Resolve aliases for better tree shaking
     config.resolve.alias = {
@@ -55,6 +55,36 @@ const nextConfig = {
       fs: false,
       path: false,
       crypto: false,
+    }
+
+    // Production optimizations
+    if (!dev && !isServer) {
+      // Enable aggressive tree shaking
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          chunks: 'all',
+          cacheGroups: {
+            ...config.optimization.splitChunks.cacheGroups,
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              priority: 5,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      }
     }
 
     // Bundle analyzer
@@ -180,6 +210,11 @@ const nextConfig = {
     ],
     // Enable modern JavaScript features
     esmExternals: true,
+    // Enable more aggressive optimizations
+    serverMinification: true,
+    serverSourceMaps: false,
+    // Optimize CSS loading - disabled due to critters dependency issues
+    // optimizeCss: process.env.NODE_ENV === 'production',
   },
 
   // Performance flags

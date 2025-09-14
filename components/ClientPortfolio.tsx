@@ -7,10 +7,7 @@ import { Navigation } from '@/components/layout/Navigation'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { StatsSection } from '@/components/sections/StatsSection'
 import { AboutSection } from '@/components/sections/AboutSection'
-import { SkillsSection } from '@/components/sections/SkillsSection'
-import { CertificateSection } from '@/components/sections/CertificateSection'
-import { EducationSection } from '@/components/sections/EducationSection'
-import { ContactSection } from '@/components/sections/ContactSection'
+// Removed static imports - now using dynamic imports for better performance
 import { Footer } from '@/components/layout/Footer'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -29,6 +26,59 @@ const ProjectsSection = dynamic(
       <div className='min-h-screen flex items-center justify-center'>
         <LoadingSpinner />
       </div>
+    ),
+  }
+)
+
+// Lazy load heavy sections that are below the fold
+const SkillsSection = dynamic(
+  () =>
+    import('@/components/sections/SkillsSection').then(mod => ({
+      default: mod.SkillsSection,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='h-96 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg' />
+    ),
+  }
+)
+
+const CertificateSection = dynamic(
+  () =>
+    import('@/components/sections/CertificateSection').then(mod => ({
+      default: mod.CertificateSection,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='h-96 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg' />
+    ),
+  }
+)
+
+const EducationSection = dynamic(
+  () =>
+    import('@/components/sections/EducationSection').then(mod => ({
+      default: mod.EducationSection,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='h-96 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg' />
+    ),
+  }
+)
+
+const ContactSection = dynamic(
+  () =>
+    import('@/components/sections/ContactSection').then(mod => ({
+      default: mod.ContactSection,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='h-96 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg' />
     ),
   }
 )

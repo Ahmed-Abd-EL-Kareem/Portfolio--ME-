@@ -169,11 +169,18 @@ export default function RootLayout({
         {/* Preconnect to external domains - optimized for performance */}
         <link rel='preconnect' href='https://picsum.photos' />
         <link rel='preconnect' href='https://images.unsplash.com' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
 
         {/* DNS Prefetch for external resources */}
         <link rel='dns-prefetch' href='https://github.com' />
         <link rel='dns-prefetch' href='https://linkedin.com' />
         <link rel='dns-prefetch' href='https://drive.google.com' />
+        <link rel='dns-prefetch' href='https://vercel.app' />
 
         {/* Preload critical resources */}
         <link rel='preload' href='/main.jpg' as='image' type='image/jpeg' />
@@ -199,7 +206,7 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            /* Critical above-the-fold styles */
+            /* Critical above-the-fold styles - optimized */
             *{box-sizing:border-box}
             html{scroll-behavior:smooth}
             body{margin:0;font-family:var(--font-poppins),system-ui,-apple-system,sans-serif;background-color:hsl(var(--background));color:hsl(var(--foreground));line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -210,7 +217,13 @@ export default function RootLayout({
             .font-loading{visibility:hidden}
             .font-loaded{visibility:visible}
             img{max-width:100%;height:auto}
-            *{transition:color 0.2s ease,background-color 0.2s ease,border-color 0.2s ease}
+            /* Optimized transitions - only for essential elements */
+            nav,button,a{transition:color 0.2s ease,background-color 0.2s ease,border-color 0.2s ease}
+            /* Prevent layout shift */
+            .container{max-width:1200px;margin:0 auto;padding:0 1rem}
+            /* Critical loading states */
+            .loading{opacity:0.7;pointer-events:none}
+            .loaded{opacity:1;pointer-events:auto}
           `,
           }}
         />

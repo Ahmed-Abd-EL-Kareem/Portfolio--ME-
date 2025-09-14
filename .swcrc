@@ -10,6 +10,14 @@
     "transform": {
       "react": {
         "runtime": "automatic"
+      },
+      "optimizer": {
+        "simplify": true,
+        "globals": {
+          "vars": {
+            "__DEV__": "false"
+          }
+        }
       }
     },
     "experimental": {
@@ -17,8 +25,19 @@
     }
   },
   "module": {
-    "type": "es6"
+    "type": "es6",
+    "strict": true,
+    "strictMode": true,
+    "lazy": false,
+    "noInterop": false
   },
   "minify": true,
-  "sourceMaps": false
+  "sourceMaps": false,
+  "env": {
+    "targets": {
+      "browsers": ["> 1%", "last 2 versions", "not dead"]
+    },
+    "mode": "usage",
+    "coreJs": 3
+  }
 }
