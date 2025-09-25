@@ -95,7 +95,7 @@
       "en": "Hotel management dashboard with booking, cabins, and analytics.",
       "ar": "لوحة تحكم لإدارة الحجوزات والغرف مع تقارير وتحليلات."
     },
-    "image": "/img/the-wild-oasis.png",
+    "image": "/img/The Wild Oasis.png",
     "technologies": ["JavaScript", "React", "Supabase", "Vite"],
     "liveUrl": "https://the-wild-oasis-mern.netlify.app/dashboard",
     "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/THE-WILD-OASIS",
