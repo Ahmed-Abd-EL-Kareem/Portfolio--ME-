@@ -64,24 +64,37 @@ export function Navigation({
       'contact',
     ]
 
+    // Track all visible sections
+    const visibleSections = new Map<string, number>()
+
     const io = new IntersectionObserver(
       entries => {
-        // اختر القسم الأكثر وضوحاً في إطار العرض
-        let mostVisible: { id: string; ratio: number } | null = null
-        for (const entry of entries) {
+        // Update visibility tracking
+        entries.forEach(entry => {
           const id = (entry.target as HTMLElement).id
-          const ratio = entry.intersectionRatio
-          if (!mostVisible || ratio > mostVisible.ratio) {
-            mostVisible = { id, ratio }
+          if (entry.isIntersecting) {
+            visibleSections.set(id, entry.intersectionRatio)
+          } else {
+            visibleSections.delete(id)
           }
-        }
-        if (mostVisible && mostVisible.ratio > 0) {
-          setActiveSection(mostVisible.id)
+        })
+
+        // Find the most visible section
+        if (visibleSections.size > 0) {
+          let mostVisible: { id: string; ratio: number } | null = null
+          for (const [id, ratio] of visibleSections) {
+            if (!mostVisible || ratio > mostVisible.ratio) {
+              mostVisible = { id, ratio }
+            }
+          }
+          if (mostVisible) {
+            setActiveSection(mostVisible.id)
+          }
         }
       },
       {
-        threshold: [0.25, 0.5, 0.75],
-        rootMargin: '-20% 0px -40% 0px', // يراعي ارتفاع الهيدر ويُحسّن الدقة
+        threshold: [0.1, 0.25, 0.5, 0.75, 0.9],
+        rootMargin: '-80px 0px -40% 0px', // يراعي ارتفاع الهيدر ويُحسّن الدقة
       }
     )
 
