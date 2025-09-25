@@ -50,80 +50,74 @@ export function Navigation({
     }
   }
 
-  // تتبع القسم النشط أثناء التمرير - محسن للأداء
+  // تتبع القسم النشط أثناء التمرير باستخدام IntersectionObserver مع دعم للأقسام المحملة ديناميكياً
   useEffect(() => {
-    // Cache section positions to avoid forced reflows
-    const sectionPositions = new Map<string, { top: number; bottom: number }>()
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
 
-    const updateSectionPositions = () => {
-      const sections = [
-        'hero',
-        'projects',
-        'about',
-        'skills',
-        'certificates',
-        'education',
-        'contact',
-      ]
+    const sectionIds = [
+      'hero',
+      'projects',
+      'about',
+      'skills',
+      'certificates',
+      'education',
+      'contact',
+    ]
 
-      sections.forEach(sectionId => {
-        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-          const element = document.getElementById(sectionId)
-          if (element) {
-            const rect = element.getBoundingClientRect()
-            const scrollTop =
-              window.pageYOffset || document.documentElement.scrollTop
-            sectionPositions.set(sectionId, {
-              top: rect.top + scrollTop,
-              bottom: rect.bottom + scrollTop,
-            })
+    const io = new IntersectionObserver(
+      entries => {
+        // اختر القسم الأكثر وضوحاً في إطار العرض
+        let mostVisible: { id: string; ratio: number } | null = null
+        for (const entry of entries) {
+          const id = (entry.target as HTMLElement).id
+          const ratio = entry.intersectionRatio
+          if (!mostVisible || ratio > mostVisible.ratio) {
+            mostVisible = { id, ratio }
           }
+        }
+        if (mostVisible && mostVisible.ratio > 0) {
+          setActiveSection(mostVisible.id)
+        }
+      },
+      {
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: '-20% 0px -40% 0px', // يراعي ارتفاع الهيدر ويُحسّن الدقة
+      }
+    )
+
+    const observed = new Set<Element>()
+    const tryObserveAll = () => {
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id)
+        if (el && !observed.has(el)) {
+          io.observe(el)
+          observed.add(el)
         }
       })
     }
 
-    // Initial position calculation
-    updateSectionPositions()
+    // راقب تغييرات الـ DOM لالتقاط الأقسام التي تُحمّل لاحقاً (ديناميكياً)
+    const mo = new MutationObserver(() => {
+      tryObserveAll()
+    })
+    mo.observe(document.body, { childList: true, subtree: true })
 
-    // Throttled scroll handler to prevent forced reflows
-    let ticking = false
-    const handleScroll = () => {
-      if (!ticking && typeof window !== 'undefined') {
-        requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + 100
+    // ملاحظة أولية + إعادة المحاولة بعد استقرار التحميل
+    tryObserveAll()
+    const retryTimers = [200, 600, 1200].map(delay =>
+      setTimeout(tryObserveAll, delay)
+    )
 
-          // Find active section using cached positions
-          for (const [sectionId, position] of sectionPositions) {
-            if (
-              scrollPosition >= position.top &&
-              scrollPosition < position.bottom
-            ) {
-              setActiveSection(sectionId)
-              break
-            }
-          }
-
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    // Update positions on resize
-    const handleResize = () => {
-      updateSectionPositions()
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll, { passive: true })
-      window.addEventListener('resize', handleResize, { passive: true })
-    }
+    // تحديث فوري عند التحميل/إعادة التحجيم لضمان دقة الحالة
+    const handleResize = () => tryObserveAll()
+    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('load', tryObserveAll, { once: true })
 
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('scroll', handleScroll)
-        window.removeEventListener('resize', handleResize)
-      }
+      io.disconnect()
+      mo.disconnect()
+      window.removeEventListener('resize', handleResize)
+      retryTimers.forEach(t => clearTimeout(t))
     }
   }, [])
 

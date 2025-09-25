@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ahmed-abd-el-kareem.vercel.app/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block access to admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow access to important files
+Allow: /favicon.ico
+Allow: /logo.png
+Allow: /main.jpg
+Allow: /main1.jpg
+Allow: /images/
+Allow: /img/

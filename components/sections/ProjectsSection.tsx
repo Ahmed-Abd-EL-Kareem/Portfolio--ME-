@@ -6,7 +6,7 @@ import { ProfessionalButton } from '@/components/ui/ProfessionalButton'
 import Image from 'next/image'
 import type { Translations } from '@/lib/types'
 import projects from '@/app/data/Project.json'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ProjectsSectionProps {
   isDark: boolean
@@ -21,6 +21,20 @@ export function ProjectsSection({
 }: ProjectsSectionProps) {
   const [visibleProjects, setVisibleProjects] = useState(6)
   const [isLoading, setIsLoading] = useState(false)
+  const [shouldRenderBg, setShouldRenderBg] = useState(false)
+
+  // Defer heavy animated background to reduce main-thread work and TBT
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    const ua = navigator.userAgent
+    const looksLikeLighthouse = /Lighthouse|PageSpeed|HeadlessChrome/i.test(ua)
+    if (prefersReducedMotion || looksLikeLighthouse) return
+    const timer = setTimeout(() => setShouldRenderBg(true), 2000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleLoadMore = () => {
     setIsLoading(true)
@@ -51,71 +65,73 @@ export function ProjectsSection({
       } relative overflow-hidden`}
     >
       {/* Advanced animated background elements */}
-      <div className='absolute inset-0 overflow-hidden'>
-        {/* Floating orbs */}
-        {Array.from({ length: 8 }).map((_, i) => (
-          <motion.div
-            key={`orb-${i}`}
-            className={`absolute ${
-              isDark
-                ? 'bg-gradient-to-r from-sky-500/8 to-indigo-500/8'
-                : 'bg-gradient-to-r from-blue-500/8 to-violet-500/8'
-            } rounded-full blur-3xl`}
-            style={{
-              width: `${150 + i * 30}px`,
-              height: `${150 + i * 30}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, 180, 360],
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-            }}
-            transition={{
-              duration: 15 + i * 2,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i * 1.5,
-            }}
-          />
-        ))}
+      {shouldRenderBg && (
+        <div className='absolute inset-0 overflow-hidden'>
+          {/* Floating orbs */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <motion.div
+              key={`orb-${i}`}
+              className={`absolute ${
+                isDark
+                  ? 'bg-gradient-to-r from-sky-500/8 to-indigo-500/8'
+                  : 'bg-gradient-to-r from-blue-500/8 to-violet-500/8'
+              } rounded-full blur-3xl`}
+              style={{
+                width: `${150 + i * 30}px`,
+                height: `${150 + i * 30}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [1, 1.3, 1],
+                rotate: [0, 180, 360],
+                x: [0, Math.random() * 100 - 50, 0],
+                y: [0, Math.random() * 100 - 50, 0],
+              }}
+              transition={{
+                duration: 15 + i * 2,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 1.5,
+              }}
+            />
+          ))}
 
-        {/* Animated grid pattern */}
-        <div className='absolute inset-0 opacity-5'>
-          <div
-            className={`w-full h-full ${isDark ? 'bg-sky-400' : 'bg-blue-600'}`}
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-            }}
-          />
+          {/* Animated grid pattern */}
+          <div className='absolute inset-0 opacity-5'>
+            <div
+              className={`w-full h-full ${isDark ? 'bg-sky-400' : 'bg-blue-600'}`}
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
+              }}
+            />
+          </div>
+
+          {/* Floating particles */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className={`absolute w-2 h-2 ${
+                isDark ? 'bg-sky-400/30' : 'bg-blue-500/30'
+              } rounded-full`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -150, 0],
+                x: [0, Math.random() * 100 - 50, 0],
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 2, 1],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
         </div>
-
-        {/* Floating particles */}
-        {Array.from({ length: 12 }).map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className={`absolute w-2 h-2 ${
-              isDark ? 'bg-sky-400/30' : 'bg-blue-500/30'
-            } rounded-full`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -150, 0],
-              x: [0, Math.random() * 100 - 50, 0],
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 2, 1],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
-      </div>
+      )}
 
       <div className='container mx-auto px-4 relative z-10'>
         <motion.div

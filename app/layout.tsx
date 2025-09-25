@@ -169,6 +169,7 @@ export default function RootLayout({
         {/* Preconnect to external domains - optimized for performance */}
         <link rel='preconnect' href='https://picsum.photos' />
         <link rel='preconnect' href='https://images.unsplash.com' />
+        <link rel='preconnect' href='https://ahmed-abd-el-kareem.vercel.app' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
           rel='preconnect'
@@ -184,6 +185,12 @@ export default function RootLayout({
 
         {/* Preload critical resources - only if they exist and are used immediately */}
         <link rel='preload' href='/logo.png' as='image' type='image/png' />
+        <link
+          rel='preload'
+          href='/main.jpg'
+          as='image'
+          imageSrcSet='/main.jpg 1x'
+        />
 
         {/* Critical CSS inlined to prevent render blocking - hydration safe */}
         <style
