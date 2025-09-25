@@ -26,6 +26,8 @@
     "monitor-cwv": "npx web-vitals",
     "performance-report": "npx lighthouse http://localhost:3000 --output=json | jq '.audits'",
     "optimize-images": "node scripts/optimize-images.js",
+    "check-hydration": "node scripts/check-hydration.js",
+    "dev-troubleshoot": "node scripts/dev-troubleshoot.js",
     "convert-webp": "npx imagemin public/images/* --plugin=webp --out-dir=public/images/webp",
     "compress-images": "npx imagemin public/images/* --plugin=mozjpeg --out-dir=public/images/compressed",
     "purge-css": "npx purgecss --css ./app/globals.css --content ./app/**/*.{js,ts,jsx,tsx} --output ./app/purged.css",

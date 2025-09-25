@@ -182,49 +182,13 @@ export default function RootLayout({
         <link rel='dns-prefetch' href='https://drive.google.com' />
         <link rel='dns-prefetch' href='https://vercel.app' />
 
-        {/* Preload critical resources */}
-        <link rel='preload' href='/main.jpg' as='image' type='image/jpeg' />
+        {/* Preload critical resources - only if they exist and are used immediately */}
         <link rel='preload' href='/logo.png' as='image' type='image/png' />
 
-        {/* Preload critical fonts with proper crossorigin */}
-        <link
-          rel='preload'
-          href='/_next/static/media/0484562807a97172-s.p.woff2'
-          as='font'
-          type='font/woff2'
-          crossOrigin='anonymous'
-        />
-        <link
-          rel='preload'
-          href='/_next/static/media/40381518f67e6cb9-s.p.woff2'
-          as='font'
-          type='font/woff2'
-          crossOrigin='anonymous'
-        />
-
-        {/* Critical CSS inlined to prevent render blocking */}
+        {/* Critical CSS inlined to prevent render blocking - hydration safe */}
         <style
           dangerouslySetInnerHTML={{
-            __html: `
-            /* Critical above-the-fold styles - optimized */
-            *{box-sizing:border-box}
-            html{scroll-behavior:smooth}
-            body{margin:0;font-family:var(--font-poppins),system-ui,-apple-system,sans-serif;background-color:hsl(var(--background));color:hsl(var(--foreground));line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-            :root{--background:0 0% 100%;--foreground:222.2 84% 4.9%;--primary:221.2 83.2% 53.3%;--primary-foreground:210 40% 98%;--border:214.3 31.8% 91.4%;--radius:0.5rem}
-            .dark{--background:222.2 84% 4.9%;--foreground:210 40% 98%;--primary:217.2 91.2% 59.8%;--primary-foreground:222.2 84% 4.9%;--border:217.2 32.6% 17.5%}
-            nav{position:fixed;top:0;left:0;right:0;z-index:40;backdrop-filter:blur(12px);border-bottom:1px solid hsl(var(--border))}
-            .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-            .font-loading{visibility:hidden}
-            .font-loaded{visibility:visible}
-            img{max-width:100%;height:auto}
-            /* Optimized transitions - only for essential elements */
-            nav,button,a{transition:color 0.2s ease,background-color 0.2s ease,border-color 0.2s ease}
-            /* Prevent layout shift */
-            .container{max-width:1200px;margin:0 auto;padding:0 1rem}
-            /* Critical loading states */
-            .loading{opacity:0.7;pointer-events:none}
-            .loaded{opacity:1;pointer-events:auto}
-          `,
+            __html: `*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font-poppins),system-ui,-apple-system,sans-serif;background-color:hsl(var(--background));color:hsl(var(--foreground));line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}:root{--background:0 0% 100%;--foreground:222.2 84% 4.9%;--primary:221.2 83.2% 53.3%;--primary-foreground:210 40% 98%;--border:214.3 31.8% 91.4%;--radius:0.5rem}.dark{--background:222.2 84% 4.9%;--foreground:210 40% 98%;--primary:217.2 91.2% 59.8%;--primary-foreground:222.2 84% 4.9%;--border:217.2 32.6% 17.5%}nav{position:fixed;top:0;left:0;right:0;z-index:40;backdrop-filter:blur(12px);border-bottom:1px solid hsl(var(--border))}.hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.font-loading{visibility:hidden}.font-loaded{visibility:visible}img{max-width:100%;height:auto}nav,button,a{transition:color 0.2s ease,background-color 0.2s ease,border-color 0.2s ease}.container{max-width:1400px;margin:0 auto;padding:0 .5rem}.loading{opacity:0.7;pointer-events:none}.loaded{opacity:1;pointer-events:auto}`,
           }}
         />
 

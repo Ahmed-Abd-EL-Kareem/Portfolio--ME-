@@ -473,6 +473,31 @@ export function ProjectsSection({
                     {getLocalizedText(project.description)}
                   </motion.p>
 
+                  {project.id === 3 && (
+                    <motion.p
+                      className={`${
+                        isDark ? 'text-sky-400' : 'text-blue-700'
+                      } text-sm font-semibold mb-6`}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                    >
+                      {currentLanguage === 'ar'
+                        ? 'للحصول على حساب للتجربة، تفضّل بزيارة'
+                        : 'Get a demo account on'}{' '}
+                      <button
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                        className={`${
+                          isDark
+                            ? 'underline decoration-sky-400 hover:text-sky-300'
+                            : 'underline decoration-blue-600 hover:text-blue-600'
+                        }`}
+                      >
+                        GitHub
+                      </button>
+                    </motion.p>
+                  )}
+
                   {/* Ultimate Technologies */}
                   <div className='flex flex-wrap gap-3 mb-8'>
                     {project.technologies.map(tech => (

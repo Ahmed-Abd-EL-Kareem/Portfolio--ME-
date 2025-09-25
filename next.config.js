@@ -104,89 +104,96 @@ const nextConfig = {
 
   // Advanced caching headers
   async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
-          { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+    const isProd = process.env.NODE_ENV === 'production'
+
+    const commonSecurityHeaders = {
+      source: '/(.*)',
+      headers: [
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-Frame-Options', value: 'DENY' },
+        { key: 'X-XSS-Protection', value: '1; mode=block' },
+        { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=(), microphone=(), geolocation=()',
+        },
+      ],
+    }
+
+    // Only apply long-term immutable caching for static assets in production.
+    const prodCachingHeaders = isProd
+      ? [
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            source: '/_next/static/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/images/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/fonts/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/fonts/(.*)',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/favicon.ico',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/favicon.ico',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/manifest.json',
+            headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
           },
-        ],
-      },
-      {
-        source: '/manifest.json',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
-      },
-      // Cache static assets with proper headers
-      {
-        source: '/main.jpg',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/main.jpg',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/main1.jpg',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/main1.jpg',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-      {
-        source: '/logo.png',
-        headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            source: '/logo.png',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
           },
-        ],
-      },
-    ]
+        ]
+      : []
+
+    return [commonSecurityHeaders, ...prodCachingHeaders]
   },
 
   // Compiler optimizations (SWC)

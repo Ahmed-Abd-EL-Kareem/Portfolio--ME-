@@ -29,22 +29,24 @@ export function Navigation({
   const [activeSection, setActiveSection] = useState('hero')
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      // حساب الموقع مع مراعاة ارتفاع الهيدر
-      const headerHeight = 80 // ارتفاع تقريبي للهيدر
-      const elementPosition = element.offsetTop - headerHeight
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        // حساب الموقع مع مراعاة ارتفاع الهيدر
+        const headerHeight = 80 // ارتفاع تقريبي للهيدر
+        const elementPosition = element.offsetTop - headerHeight
 
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth',
-      })
-    }
-    // إغلاق القائمة على الهاتف المحمول بعد تأخير قصير
-    if (isMenuOpen) {
-      setTimeout(() => {
-        onToggleMenu()
-      }, 300)
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth',
+        })
+      }
+      // إغلاق القائمة على الهاتف المحمول بعد تأخير قصير
+      if (isMenuOpen) {
+        setTimeout(() => {
+          onToggleMenu()
+        }, 300)
+      }
     }
   }
 
@@ -65,15 +67,17 @@ export function Navigation({
       ]
 
       sections.forEach(sectionId => {
-        const element = document.getElementById(sectionId)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          const scrollTop =
-            window.pageYOffset || document.documentElement.scrollTop
-          sectionPositions.set(sectionId, {
-            top: rect.top + scrollTop,
-            bottom: rect.bottom + scrollTop,
-          })
+        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+          const element = document.getElementById(sectionId)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            const scrollTop =
+              window.pageYOffset || document.documentElement.scrollTop
+            sectionPositions.set(sectionId, {
+              top: rect.top + scrollTop,
+              bottom: rect.bottom + scrollTop,
+            })
+          }
         }
       })
     }
@@ -84,7 +88,7 @@ export function Navigation({
     // Throttled scroll handler to prevent forced reflows
     let ticking = false
     const handleScroll = () => {
-      if (!ticking) {
+      if (!ticking && typeof window !== 'undefined') {
         requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 100
 
@@ -110,12 +114,16 @@ export function Navigation({
       updateSectionPositions()
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize, { passive: true })
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      window.addEventListener('resize', handleResize, { passive: true })
+    }
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('resize', handleResize)
+      }
     }
   }, [])
 
@@ -139,7 +147,7 @@ export function Navigation({
           : 'bg-white/95 border-indigo-200/50'
       } backdrop-blur-xl border-b shadow-lg`}
     >
-      <div className='container mx-auto px-4 py-4 flex justify-between items-center gap-4'>
+      <div className='container mx-auto h-20 px-4 py-4 flex justify-between items-center gap-4'>
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

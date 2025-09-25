@@ -45,19 +45,25 @@
       "ar": "نظام حضور الموظفين"
     },
     "description": {
-      "en": "Advanced attendance system for employees with user-friendly interface, to Get account to login go to github",
-      "ar": "نظام حضور متقدم للموظفين مع واجهة سهلة الاستخدام ، للحصول على حساب لتسجيل الدخول انتقل إلى github "
+      "en": "Advanced attendance system for employees with a user-friendly interface. For a demo account to log in, please visit the GitHub repository.",
+      "ar": "نظام حضور متقدم للموظفين بواجهة سهلة الاستخدام. للحصول على حساب للتجربة وتسجيل الدخول، يرجى زيارة مستودع GitHub."
     },
     "image": "/img/Attendance System for Employees.jpeg",
     "technologies": [
-      "JavaScript",
       "React",
       "Node.js",
-      "Employee Management",
-      "Attendance Tracking"
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Cloudinary",
+      "React Query",
+      "Bootstrap",
+      "face-api.js",
+      "Mapbox GL JS"
     ],
     "liveUrl": "https://attendance-system-mu.vercel.app/",
-    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Attendance-Systme-For-Employee-Graduation-Project-",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Attendance-Systme-For-Employee-Graduation-Project",
     "featured": true
   },
   {
@@ -81,6 +87,22 @@
     "liveUrl": "https://natours-lake-one.vercel.app/",
     "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Natours",
     "featured": true
+  },
+  {
+    "id": 18,
+    "title": {
+      "en": "THE WILD OASIS",
+      "ar": "ذا وايلد واسيز"
+    },
+    "description": {
+      "en": "Hotel management dashboard with booking, cabins, and analytics.",
+      "ar": "لوحة تحكم لإدارة الحجوزات والغرف مع تقارير وتحليلات."
+    },
+    "image": "/img/the-wild-oasis.jpeg",
+    "technologies": ["JavaScript", "React", "Supabase", "Vite"],
+    "liveUrl": "https://the-wild-oasis-mern.netlify.app/dashboard",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/THE-WILD-OASIS",
+    "featured": false
   },
   {
     "id": 5,
