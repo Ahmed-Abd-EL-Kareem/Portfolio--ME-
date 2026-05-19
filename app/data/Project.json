@@ -1,5 +1,68 @@
 [
   {
+    "id": 19,
+    "title": {
+      "en": "The Wild Oasis Mainsite",
+      "ar": "موقع ذا وايلد أوسيس الرئيسي"
+    },
+    "description": {
+      "en": "Main site for The Wild Oasis project.",
+      "ar": "الموقع الرئيسي لمشروع ذا وايلد أوسيس."
+    },
+    "image": "/img/cabin.jpeg",
+    "technologies": ["JavaScript", "React"],
+    "liveUrl": "https://the-wild-oasis-mainsite.vercel.app",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/The-Wild-Oasis-Mainsite",
+    "featured": true
+  },
+  {
+    "id": 20,
+    "title": {
+      "en": "Cabins NestJS Back-End",
+      "ar": "خلفية كبائن NestJS"
+    },
+    "description": {
+      "en": "A NestJS-based GraphQL API for cabin booking and management. Features include user authentication with JWT, cabin management, booking system with status tracking, and role-based access control.",
+      "ar": "واجهة برمجة تطبيقات GraphQL مبنية على NestJS لإدارة وحجز الكبائن. تشمل الميزات مصادقة المستخدم مع JWT ونظام إدارة الحجوزات وتتبع الحالة."
+    },
+    "image": "/img/github.png",
+    "technologies": ["TypeScript", "NestJS", "GraphQL", "JWT"],
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Cabins-Nest-JS-Back-End",
+    "featured": true
+  },
+  {
+    "id": 21,
+    "title": {
+      "en": "Polling Data Aggregation Front-End",
+      "ar": "الواجهة الأمامية لتجميع بيانات الاقتراع"
+    },
+    "description": {
+      "en": "A production-ready, scalable polling system frontend using React, Vite, Tailwind CSS, and TanStack Query with modern Framer Motion animations.",
+      "ar": "واجهة أمامية جاهزة للإنتاج لنظام الاقتراع باستخدام React و Vite و Tailwind CSS و TanStack Query مع حركات Framer Motion الحديثة."
+    },
+    "image": "/img/poll.jpeg",
+    "technologies": ["JavaScript", "React", "Vite", "Tailwind CSS", "TanStack Query"],
+    "liveUrl": "https://polling-data-aggregation-api-front.vercel.app",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/Polling-Data-Aggregation-API-Front-End",
+    "featured": true
+  },
+  {
+    "id": 22,
+    "title": {
+      "en": "Polling Data Aggregation API",
+      "ar": "واجهة برمجة تطبيقات تجميع بيانات الاقتراع"
+    },
+    "description": {
+      "en": "A production-ready Node.js backend for polling, featuring security best practices, robust routing, pagination, caching, and rate limiting.",
+      "ar": "خلفية جاهزة للإنتاج مبنية بـ Node.js للاقتراع، تتميز بأفضل ممارسات الأمان والتوجيه القوي وتقسيم الصفحات والتخزين المؤقت."
+    },
+    "image": "/img/github.png",
+    "technologies": ["JavaScript", "Node.js", "Express", "API"],
+    "liveUrl": "https://iti-node-js-polling-data-aggregatio.vercel.app",
+    "githubUrl": "https://github.com/Ahmed-Abd-EL-Kareem/ITI-NodeJs-Polling-Data-Aggregation-API",
+    "featured": true
+  },
+  {
     "id": 1,
     "title": {
       "en": "E-Commerce Platform",
